@@ -665,7 +665,7 @@ public class DateUtil {
         long minutes = min - hour*60 - day*24*60;
         if (day > 0)
             remainDays += day + "天";
-        if (hour >= 0)
+        if (hour > 0 || (hour == 0 && minutes > 0))
             remainDays += hour + "小时";
         if (minutes > 0)
             remainDays += minutes + "小时";
