@@ -1,4 +1,4 @@
-package net.unmz.java.utils;
+package net.unmz.java.utils.date;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
