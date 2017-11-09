@@ -1,4 +1,4 @@
-package net.unmz.java.utils;
+package net.unmz.java.utils.date;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -23,10 +23,10 @@ public class DateUtil {
     /**
      * 要用到的DATE Format的定义
      */
-    public static final String DATE_FORMAT_DATEONLY = "yyyy-MM-dd"; // 年/月/日
+    public static final String DATE_FORMAT_DATE_ONLY = "yyyy-MM-dd"; // 年/月/日
     public static final String DATE_FORMAT_DATETIME = "yyyy-MM-dd HH:mm:ss"; // 年/月/日
-    public static final String DATE_FORMAT_DATETIME14 = "yyyyMMddHHmmss"; // 年/月/日
-    public static final String SHORTDATEFORMAT = "yyyyMMdd";
+    public static final String DATE_FORMAT_DATETIME_14 = "yyyyMMddHHmmss"; // 年/月/日
+    public static final String SHORT_DATE_FORMAT = "yyyyMMdd";
     public static final String HMS_FORMAT = "HH:mm:ss";
 
     /**
@@ -52,7 +52,7 @@ public class DateUtil {
      * @see LocalDate
      */
     public static LocalDate parseLocalDate(String str) throws ParseException {
-        return LocalDate.parse(str, DateTimeFormatter.ofPattern(DATE_FORMAT_DATEONLY));
+        return LocalDate.parse(str, DateTimeFormatter.ofPattern(DATE_FORMAT_DATE_ONLY));
     }
 
     /**
@@ -88,7 +88,7 @@ public class DateUtil {
      * @return 当前日期 yyyy-MM-dd
      */
     public static String getCurrentDate() {
-        return LocalDate.now().format(DateTimeFormatter.ofPattern(DATE_FORMAT_DATEONLY));
+        return LocalDate.now().format(DateTimeFormatter.ofPattern(DATE_FORMAT_DATE_ONLY));
     }
 
     /**
@@ -125,7 +125,7 @@ public class DateUtil {
      * @return yyyy-MM-dd 日期
      */
     public static String formaterDate(LocalDate date) {
-        return date.format(DateTimeFormatter.ofPattern(DATE_FORMAT_DATEONLY));
+        return date.format(DateTimeFormatter.ofPattern(DATE_FORMAT_DATE_ONLY));
     }
 
     /**
@@ -135,7 +135,7 @@ public class DateUtil {
      * @return yyyyMMdd 字符串
      */
     public static String formaterDateToyyyyMMdd(LocalDate date) {
-        return date.format(DateTimeFormatter.ofPattern(SHORTDATEFORMAT));
+        return date.format(DateTimeFormatter.ofPattern(SHORT_DATE_FORMAT));
     }
 
     /**
@@ -155,7 +155,7 @@ public class DateUtil {
      * @return
      */
     public static String formaterLocalDateTime14(LocalDateTime dateTime) {
-        return dateTime.format(DateTimeFormatter.ofPattern(DATE_FORMAT_DATETIME14));
+        return dateTime.format(DateTimeFormatter.ofPattern(DATE_FORMAT_DATETIME_14));
     }
 
     /**
@@ -530,7 +530,7 @@ public class DateUtil {
      * @return yyyy-MM-dd
      */
     public static String subDays(int days) {
-        return LocalDate.now().minusDays(days).format(DateTimeFormatter.ofPattern(DATE_FORMAT_DATEONLY));
+        return LocalDate.now().minusDays(days).format(DateTimeFormatter.ofPattern(DATE_FORMAT_DATE_ONLY));
     }
 
     /**
@@ -560,7 +560,7 @@ public class DateUtil {
      * @return yyyy-MM-dd
      */
     public static String getYesterday(LocalDate date) {
-        return date.minusDays(1).format(DateTimeFormatter.ofPattern(DATE_FORMAT_DATEONLY));
+        return date.minusDays(1).format(DateTimeFormatter.ofPattern(DATE_FORMAT_DATE_ONLY));
     }
 
     /**
