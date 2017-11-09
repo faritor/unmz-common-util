@@ -11,6 +11,18 @@
     <name>JavaUtil</name>
     <description>Util project for Java</description>
 
+    <developers>
+        <developer>
+            <name>Faritor Kang</name>
+            <id>faritor</id>
+            <email>faritor@unmz.net</email>
+            <organization>Mirry Technology</organization>
+            <roles>
+                <role>Java Developer</role>
+            </roles>
+        </developer>
+    </developers>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
