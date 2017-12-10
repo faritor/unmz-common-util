@@ -1,4 +1,4 @@
-package net.unmz.java.utils.date;
+package net.unmz.java.util.date;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -10,8 +10,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Project Name: 时间工具类
- * 功能描述：常用时间处理工具类
+ * Project Name: 常用工具类集合
+ * 功能描述：时间处理工具类
  *
  * @author Faritor
  * @version 1.0
