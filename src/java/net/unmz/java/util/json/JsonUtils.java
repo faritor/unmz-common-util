@@ -18,7 +18,7 @@ import java.util.Map;
  * @date 2017-12-09 20:30
  * @since JDK 1.8
  */
-public class JsonUtil {
+public class JsonUtils {
 
     private static final SerializeConfig config;
 

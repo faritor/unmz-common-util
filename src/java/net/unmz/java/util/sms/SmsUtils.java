@@ -1,7 +1,7 @@
 package net.unmz.java.util.sms;
 
 import net.unmz.java.util.http.HttpUtils;
-import net.unmz.java.util.json.JsonUtil;
+import net.unmz.java.util.json.JsonUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 
@@ -11,14 +11,14 @@ import java.util.Map;
 /**
  * Project Name: 常用工具类集合
  * 功能描述：短信工具类 <br/>
- *      本项目依托于赛邮云通信完成短信发送
+ * 本项目依托于赛邮云通信完成短信发送
  *
  * @author faritor@unmz.net
  * @version 1.0
  * @date 2017-12-10 16:40
  * @since JDK 1.8
  */
-public class SmsUtil {
+public class SmsUtils {
 
     private static final String APPID = "*";
     private static final String SIGNATURE = "*";
@@ -27,7 +27,6 @@ public class SmsUtil {
         System.out.println("request context :" + context);
         String host = "https://api.mysubmail.com";
         String path = "/message/xsend";
-        String method = "POST";
         Map<String, String> headers = new HashMap<>();
         Map<String, String> queries = new HashMap<>();
         Map<String, String> body = new HashMap<>();
@@ -38,11 +37,11 @@ public class SmsUtil {
         body.put("vars", context);
 
         try {
-            HttpResponse response = HttpUtils.doPost(host, path, method, headers, queries, body);
+            HttpResponse response = HttpUtils.doPost(host, path, headers, queries, body);
             String result = EntityUtils.toString(response.getEntity());
             System.out.println("sms response message: " + result);
-            SmsResultVo vo = JsonUtil.toBean(result, SmsResultVo.class);
-            if(vo.getStatus().equalsIgnoreCase("success"))
+            SmsResultVo vo = JsonUtils.toBean(result, SmsResultVo.class);
+            if (vo.getStatus().equalsIgnoreCase("success"))
                 return "success";
         } catch (Exception e) {
             e.printStackTrace();

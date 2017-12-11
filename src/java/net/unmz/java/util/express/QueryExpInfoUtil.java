@@ -1,7 +1,7 @@
 package net.unmz.java.util.express;
 
 import net.unmz.java.util.http.HttpUtils;
-import net.unmz.java.util.json.JsonUtil;
+import net.unmz.java.util.json.JsonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
@@ -33,13 +33,12 @@ public class QueryExpInfoUtil {
         QueryHeard queryHeard = new QueryHeard(orderNo, type).invoke();
         String host = queryHeard.getHost();
         String path = queryHeard.getPath();
-        String method = queryHeard.getMethod();
         Map<String, String> headers = queryHeard.getHeaders();
         Map<String, String> queries = queryHeard.getQueries();
         ExpResultInfoVo dto = null;
 
         try {
-            dto = getExpResultInfoDto(host, path, method, headers, queries);
+            dto = getExpResultInfoDto(host, path, headers, queries);
             StringBuilder str = new StringBuilder();
             dto.getResult().getList().forEach(list -> str.append(list.getTime()).append(" ").append(list.getStatus()).append("\n"));
             return str.toString();
@@ -53,21 +52,20 @@ public class QueryExpInfoUtil {
      * 返回物流信息 用于显示物流
      *
      * @param orderNo 物流单号
-     * @param type 快递公司类型
+     * @param type    快递公司类型
      * @return 一个数组
      */
     public static List<String> queryExpInfoPrintList(String orderNo, String type) {
         QueryHeard queryHeard = new QueryHeard(orderNo, type).invoke();
         String host = queryHeard.getHost();
         String path = queryHeard.getPath();
-        String method = queryHeard.getMethod();
         Map<String, String> headers = queryHeard.getHeaders();
         Map<String, String> queries = queryHeard.getQueries();
         ExpResultInfoVo dto = null;
         List<String> arrayList = new ArrayList<>();
 
         try {
-            dto = getExpResultInfoDto(host, path, method, headers, queries);
+            dto = getExpResultInfoDto(host, path, headers, queries);
             StringBuilder str = new StringBuilder();
 
             dto.getResult().getList().forEach(list -> {
@@ -96,12 +94,11 @@ public class QueryExpInfoUtil {
         QueryHeard queryHeard = new QueryHeard(orderNo, type).invoke();
         String host = queryHeard.getHost();
         String path = queryHeard.getPath();
-        String method = queryHeard.getMethod();
         Map<String, String> headers = queryHeard.getHeaders();
         Map<String, String> queries = queryHeard.getQueries();
 
         try {
-            return getExpResultInfoDto(host, path, method, headers, queries);
+            return getExpResultInfoDto(host, path, headers, queries);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -115,7 +112,7 @@ public class QueryExpInfoUtil {
      * @return
      */
     public static String printExpInfoStr(ExpResultInfoVo dto) {
-        if(null == dto)
+        if (null == dto)
             return null;
         StringBuilder str = new StringBuilder();
         dto.getResult().getList().forEach(list -> str.append(list.getTime()).append(" ").append(list.getStatus()).append("\n"));
@@ -127,17 +124,16 @@ public class QueryExpInfoUtil {
      *
      * @param host    接口请求地址
      * @param path    接口请求项目
-     * @param method  请求方式
      * @param headers 请求头文件
      * @param queries 请求参数
      * @return
      * @throws Exception
      */
-    public static ExpResultInfoVo getExpResultInfoDto(String host, String path, String method, Map<String, String> headers, Map<String, String> queries) throws Exception {
-        HttpResponse response = HttpUtils.doGet(host, path, method, headers, queries);
+    public static ExpResultInfoVo getExpResultInfoDto(String host, String path, Map<String, String> headers, Map<String, String> queries) throws Exception {
+        HttpResponse response = HttpUtils.doGet(host, path, headers, queries);
         //获取response的body
         String result = EntityUtils.toString(response.getEntity());
-        return JsonUtil.toBean(result, ExpResultInfoVo.class);
+        return JsonUtils.toBean(result, ExpResultInfoVo.class);
     }
 
     /**
@@ -148,7 +144,6 @@ public class QueryExpInfoUtil {
         private String type;
         private String host;
         private String path;
-        private String method;
         private String appCode;
         private Map<String, String> headers;
         private Map<String, String> queries;
@@ -164,10 +159,6 @@ public class QueryExpInfoUtil {
 
         public String getPath() {
             return path;
-        }
-
-        public String getMethod() {
-            return method;
         }
 
         public String getAppCode() {
@@ -189,7 +180,6 @@ public class QueryExpInfoUtil {
         public QueryHeard invoke() {
             host = "http://wuliu.market.alicloudapi.com";
             path = "/kdi";
-            method = "GET";
             String appCode = this.appCode != null ? this.appCode : "9576f987c8d3458eaad2c5b645c19b95";
             headers = new HashMap<>();
             //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105

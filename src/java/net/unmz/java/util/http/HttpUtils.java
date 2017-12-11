@@ -17,6 +17,7 @@ import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
@@ -27,16 +28,18 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
  *
  */
+
 /**
  * Project Name: 常用工具类集合
  * 功能描述：Http工具类<br/>
- *      此类采用阿里云分享的HttpsUtils,特此申明来源
+ * 此类采用阿里云分享的HttpsUtils,特此申明来源
  *
  * @author faritor@unmz.net
  * @version 1.0
@@ -50,13 +53,12 @@ public class HttpUtils {
      *
      * @param host
      * @param path
-     * @param method
      * @param headers
      * @param queries
      * @return
      * @throws Exception
      */
-    public static HttpResponse doGet(String host, String path, String method,
+    public static HttpResponse doGet(String host, String path,
                                      Map<String, String> headers,
                                      Map<String, String> queries)
             throws Exception {
@@ -70,18 +72,33 @@ public class HttpUtils {
     }
 
     /**
+     * 简化Post请求 返回响应字符串
+     *
+     * @param host
+     * @param path
+     * @param body
+     * @return
+     */
+    public static String doPostResponseStr(String host, String path, Map<String, String> body) throws Exception {
+        Map<String, String> header = new HashMap<>();
+        Map<String, String> queries = new HashMap<>();
+
+        HttpResponse response = HttpUtils.doPost(host, path, header, queries, body);
+        return EntityUtils.toString(response.getEntity());
+    }
+
+    /**
      * post form
      *
      * @param host
      * @param path
-     * @param method
      * @param headers
      * @param queries
      * @param bodies
      * @return
      * @throws Exception
      */
-    public static HttpResponse doPost(String host, String path, String method,
+    public static HttpResponse doPost(String host, String path,
                                       Map<String, String> headers,
                                       Map<String, String> queries,
                                       Map<String, String> bodies)
@@ -94,7 +111,7 @@ public class HttpUtils {
         }
 
         if (bodies != null) {
-            List<NameValuePair> nameValuePairList = new ArrayList<NameValuePair>();
+            List<NameValuePair> nameValuePairList = new ArrayList<>();
 
             for (String key : bodies.keySet()) {
                 nameValuePairList.add(new BasicNameValuePair(key, bodies.get(key)));
@@ -112,14 +129,13 @@ public class HttpUtils {
      *
      * @param host
      * @param path
-     * @param method
      * @param headers
      * @param queries
      * @param body
      * @return
      * @throws Exception
      */
-    public static HttpResponse doPost(String host, String path, String method,
+    public static HttpResponse doPost(String host, String path,
                                       Map<String, String> headers,
                                       Map<String, String> queries,
                                       String body)
@@ -143,14 +159,13 @@ public class HttpUtils {
      *
      * @param host
      * @param path
-     * @param method
      * @param headers
      * @param queries
      * @param body
      * @return
      * @throws Exception
      */
-    public static HttpResponse doPost(String host, String path, String method,
+    public static HttpResponse doPost(String host, String path,
                                       Map<String, String> headers,
                                       Map<String, String> queries,
                                       byte[] body)
@@ -171,16 +186,16 @@ public class HttpUtils {
 
     /**
      * Put String
+     *
      * @param host
      * @param path
-     * @param method
      * @param headers
      * @param queries
      * @param body
      * @return
      * @throws Exception
      */
-    public static HttpResponse doPut(String host, String path, String method,
+    public static HttpResponse doPut(String host, String path,
                                      Map<String, String> headers,
                                      Map<String, String> queries,
                                      String body)
@@ -201,16 +216,16 @@ public class HttpUtils {
 
     /**
      * Put stream
+     *
      * @param host
      * @param path
-     * @param method
      * @param headers
      * @param queries
      * @param body
      * @return
      * @throws Exception
      */
-    public static HttpResponse doPut(String host, String path, String method,
+    public static HttpResponse doPut(String host, String path,
                                      Map<String, String> headers,
                                      Map<String, String> queries,
                                      byte[] body)
@@ -234,13 +249,12 @@ public class HttpUtils {
      *
      * @param host
      * @param path
-     * @param method
      * @param headers
      * @param queries
      * @return
      * @throws Exception
      */
-    public static HttpResponse doDelete(String host, String path, String method,
+    public static HttpResponse doDelete(String host, String path,
                                         Map<String, String> headers,
                                         Map<String, String> queries)
             throws Exception {
@@ -301,14 +315,16 @@ public class HttpUtils {
                 public X509Certificate[] getAcceptedIssuers() {
                     return null;
                 }
+
                 public void checkClientTrusted(X509Certificate[] xcs, String str) {
 
                 }
+
                 public void checkServerTrusted(X509Certificate[] xcs, String str) {
 
                 }
             };
-            ctx.init(null, new TrustManager[] { tm }, null);
+            ctx.init(null, new TrustManager[]{tm}, null);
             SSLSocketFactory ssf = new SSLSocketFactory(ctx);
             ssf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
             ClientConnectionManager ccm = httpClient.getConnectionManager();

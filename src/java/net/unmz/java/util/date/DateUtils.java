@@ -18,7 +18,7 @@ import java.util.Date;
  * @date 2017-11-06 18:51
  * @since JDK 1.8
  */
-public class DateUtil {
+public class DateUtils {
 
     /**
      * 要用到的DATE Format的定义
@@ -102,6 +102,7 @@ public class DateUtil {
 
     /**
      * 获取当前日期时间
+     *
      * @param format 格式字符串
      * @return 获取当前日期时间
      */
@@ -596,6 +597,7 @@ public class DateUtil {
     /**
      * 获得当天近一周
      * 最近一周，一周前的日期时间
+     *
      * @return
      */
     public static LocalDateTime getAWeekFromNow() {
@@ -606,6 +608,7 @@ public class DateUtil {
     /**
      * 获得当天近一月
      * 最近一月，一个月前的日期时间
+     *
      * @return
      */
     public static LocalDateTime getAMonthFromNow() {
@@ -616,6 +619,7 @@ public class DateUtil {
     /**
      * 获得当天近三个月
      * 最近三个月，三个月前的日期时间
+     *
      * @return
      */
     public static LocalDateTime getThreeMonthFromNow() {
@@ -626,6 +630,7 @@ public class DateUtil {
     /**
      * 获得当天近一年
      * 最近一年，一年前的日期时间
+     *
      * @return
      */
     public static LocalDateTime getAYearFromNow() {
@@ -637,32 +642,34 @@ public class DateUtil {
     public String toString() {
         return super.toString();
     }
+
     /**
-     *
      * 将时间戳转成yyyyMMdd HH:mm:ss字符串. <br/>
+     *
      * @param timestamp
      * @return
      * @throws ParseException
      */
-    public static String timestampToDateStr(String timestamp) throws ParseException{
+    public static String timestampToDateStr(String timestamp) throws ParseException {
         Long timestampL = Long.parseLong(timestamp);
         return parseInstantToDataStr(new Date(timestampL).toInstant());
     }
 
     /**
      * 通过 起始时间算出中间的时间差值 格式为  某天某小时某分钟
+     *
      * @param startTime
      * @param endTime
      * @return
      */
-    public static String getDate(Timestamp startTime,Timestamp endTime){
+    public static String getDate(Timestamp startTime, Timestamp endTime) {
         LocalDateTime start = startTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         LocalDateTime end = endTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-        long min = DateUtil.getMinutesBetween(start, end);
+        long min = DateUtils.getMinutesBetween(start, end);
         String remainDays = "";
-        long day = min/60/24;
-        long hour = min/60 - day*24;
-        long minutes = min - hour*60 - day*24*60;
+        long day = min / 60 / 24;
+        long hour = min / 60 - day * 24;
+        long minutes = min - hour * 60 - day * 24 * 60;
         if (day > 0)
             remainDays += day + "天";
         if (hour > 0 || (hour == 0 && minutes > 0))
