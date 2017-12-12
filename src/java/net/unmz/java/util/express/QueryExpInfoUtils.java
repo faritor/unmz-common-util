@@ -20,7 +20,7 @@ import java.util.Map;
  * @date 2017-12-09 17:57
  * @since JDK 1.8
  */
-public class QueryExpInfoUtil {
+public class QueryExpInfoUtils {
 
     /**
      * 返回物流信息 用于显示物流
