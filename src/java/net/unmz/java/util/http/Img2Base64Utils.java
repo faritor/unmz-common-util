@@ -9,7 +9,7 @@ import java.io.OutputStream;
 import org.apache.commons.codec.binary.Base64;
 
 /**
- * Project Name: 酷配车险
+ * Project Name: 常用工具类集合
  * 功能描述：
  * 将图片转换为Base64<br>
  * 将base64编码字符串解码成img图片
@@ -19,7 +19,6 @@ import org.apache.commons.codec.binary.Base64;
  * @date 2017-12-11 16:49
  * @since JDK 1.8
  */
-
 public class Img2Base64Utils {
 
     public static void main(String[] args) {
