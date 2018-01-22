@@ -16,8 +16,8 @@ public class UnicodeUtils {
      * @param gbString
      * @return
      */
-    public static String encodeUnicode(final String gbString) {   //gbString = "测试"
-        char[] utfBytes = gbString.toCharArray();   //utfBytes = [测, 试]
+    public static String encodeUnicode(final String gbString) {
+        char[] utfBytes = gbString.toCharArray();
         String unicodeBytes = "";
         for (int byteIndex = 0; byteIndex < utfBytes.length; byteIndex++) {
             String hexB = Integer.toHexString(utfBytes[byteIndex]);   //转换为16进制整型字符串
