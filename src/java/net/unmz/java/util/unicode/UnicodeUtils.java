@@ -1,4 +1,4 @@
-package net.unmz.java.util.Unicode;
+package net.unmz.java.util.unicode;
 
 /**
  * Project Name: 常用工具类集合
