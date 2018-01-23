@@ -1,6 +1,14 @@
 # unmz-common-util
 常用的Java工具类
 
+项目现已发布依赖地址:
+
+    <dependency>
+        <groupId>net.unmz.java</groupId>
+        <artifactId>unmz-common-util</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+
 现已包含:
 
     1.时间处理Date
