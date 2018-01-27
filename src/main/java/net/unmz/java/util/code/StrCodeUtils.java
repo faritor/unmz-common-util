@@ -23,7 +23,9 @@ public class StrCodeUtils {
      * @param length 验证码位数长度
      * @return 返回生成的数字验证码
      */
-    public static int getNumberCode(int length) {
+    public static int getNumberCode(int length) {//-2147483648~2147483647
+        if(length > 9)
+            new Exception("The number is too big");
         Random random = new Random();
         StringBuffer max = new StringBuffer().append("8");
         StringBuffer min = new StringBuffer().append("1");

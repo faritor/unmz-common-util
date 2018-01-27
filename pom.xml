@@ -5,12 +5,12 @@
 
     <groupId>net.unmz.java</groupId>
     <artifactId>unmz-common-util</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
 
     <name>unmz-common-util</name>
-    <description>Util project for Java</description>
     <url>https://www.unmz.net</url>
+    <description>Util project for Java</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,15 +26,22 @@
 
     <developers>
         <developer>
+            <id>FaritorKang</id>
             <name>Faritor Kang</name>
-            <id>faritor</id>
             <email>faritor@unmz.net</email>
+            <url>https://www.unmz.net</url>
             <organization>Mirry Technology</organization>
+            <organizationUrl>https://www.mirrytech.com</organizationUrl>
             <roles>
                 <role>Java Developer</role>
             </roles>
         </developer>
     </developers>
+
+    <organization>
+        <name>Mirry Technology</name>
+        <url>https://www.mirrytech.com</url>
+    </organization>
 
     <scm>
         <connection>scm:git:git@github.com:FaritorKang/unmz-common-util.git</connection>
@@ -73,6 +80,7 @@
             <artifactId>xstream</artifactId>
             <version>1.4.9</version>
         </dependency>
+
     </dependencies>
 
     <build>
