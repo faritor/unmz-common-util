@@ -6,7 +6,7 @@
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.2</version>
     </dependency>
 
 现已包含:
@@ -25,3 +25,4 @@
     12.图形验证码工具类
     13.Unicode转换
     14.自定义数字/字符串验证码生成
+    15.数组工具类
