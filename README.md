@@ -1,12 +1,19 @@
 # unmz-common-util
 常用的Java工具类
 
+
+~~项目基于JDK1.8编译，在选择使用时，请考虑版本冲突问题。~~
+
+
+项目现已降级，改为1.7编译。
+
+
 项目现已发布依赖地址:
 
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.4</version>
     </dependency>
 
 现已包含:
