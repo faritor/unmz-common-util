@@ -2,14 +2,12 @@ package net.unmz.java.util.http;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.*;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
@@ -35,18 +33,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- */
 
 /**
  * Project Name: 常用工具类集合
  * 功能描述：Http工具类<br/>
  * 1.0.0版本 此类采用阿里云分享的HttpsUtils,特此申明来源
  * 1.0.1版本 各种请求方式的请求头中添加字符集,完善相关方法
+ * 1.0.2版本 修复请求头中类型问题,设置默认值
+ * 1.0.3版本 判断请求中是否有请求参数有则使用传递的,没有则使用默认的
  *
  * @author faritor@unmz.net
- * @version 1.0
+ * @version 1.0.3
  * @date 2017-12-09 20:30
  * @since JDK 1.8
  */
@@ -54,11 +51,12 @@ public class HttpUtils {
 
     /**
      * Get方法
+     *
      * @param url
      * @return
      * @throws Exception
      */
-    public static String doGet(String url) throws Exception{
+    public static String doGet(String url) throws Exception {
         HttpResponse response = doGet(url, null, null, null);
         return responseStr(response);
     }
@@ -73,21 +71,23 @@ public class HttpUtils {
      * @return
      * @throws Exception
      */
-    public static HttpResponse  doGet(String host, String path,
+    public static HttpResponse doGet(String host, String path,
                                      Map<String, String> headers,
                                      Map<String, String> queries) throws Exception {
         HttpClient httpClient = wrapClient(host);
-        if (headers == null)
-            headers = new HashMap<>();
         if (queries == null)
             queries = new HashMap<>();
 
         HttpGet request = new HttpGet(buildUrl(host, path, queries));
+
+        if (headers == null) {
+            headers = new HashMap<>();
+            setHttpHeader(request);
+        }
+
         for (Map.Entry<String, String> e : headers.entrySet()) {
             request.addHeader(e.getKey(), e.getValue());
         }
-        request.setHeader(
-                new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
         return httpClient.execute(request);
     }
 
@@ -120,12 +120,17 @@ public class HttpUtils {
                                       Map<String, String> queries,
                                       Map<String, String> bodies) throws Exception {
         HttpClient httpClient = wrapClient(host);
-        if (headers == null)
-            headers = new HashMap<>();
+
         if (queries == null)
             queries = new HashMap<>();
 
         HttpPost request = new HttpPost(buildUrl(host, path, queries));
+
+        if (headers == null) {
+            headers = new HashMap<>();
+            setHttpHeader(request);
+        }
+
         for (Map.Entry<String, String> e : headers.entrySet()) {
             request.addHeader(e.getKey(), e.getValue());
         }
@@ -140,8 +145,6 @@ public class HttpUtils {
             formEntity.setContentType("application/x-www-form-urlencoded; charset=UTF-8");
             request.setEntity(formEntity);
         }
-        request.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
-        request.setHeader(new BasicHeader("Accept", "text/plain;charset=utf-8"));
         return httpClient.execute(request);
     }
 
@@ -161,12 +164,16 @@ public class HttpUtils {
                                       Map<String, String> queries,
                                       String body) throws Exception {
         HttpClient httpClient = wrapClient(host);
-        if (headers == null)
-            headers = new HashMap<>();
         if (queries == null)
             queries = new HashMap<>();
 
         HttpPost request = new HttpPost(buildUrl(host, path, queries));
+
+        if (headers == null) {
+            headers = new HashMap<>();
+            setHttpHeader(request);
+        }
+
         for (Map.Entry<String, String> e : headers.entrySet()) {
             request.addHeader(e.getKey(), e.getValue());
         }
@@ -174,8 +181,6 @@ public class HttpUtils {
         if (StringUtils.isNotBlank(body)) {
             request.setEntity(new StringEntity(body, "utf-8"));
         }
-        request.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
-        request.setHeader(new BasicHeader("Accept", "text/plain;charset=utf-8"));
         return httpClient.execute(request);
     }
 
@@ -195,12 +200,17 @@ public class HttpUtils {
                                       Map<String, String> queries,
                                       byte[] body) throws Exception {
         HttpClient httpClient = wrapClient(host);
-        if (headers == null)
-            headers = new HashMap<>();
+
         if (queries == null)
             queries = new HashMap<>();
 
         HttpPost request = new HttpPost(buildUrl(host, path, queries));
+
+        if (headers == null) {
+            headers = new HashMap<>();
+            setHttpHeader(request);
+        }
+
         for (Map.Entry<String, String> e : headers.entrySet()) {
             request.addHeader(e.getKey(), e.getValue());
         }
@@ -208,8 +218,6 @@ public class HttpUtils {
         if (body != null) {
             request.setEntity(new ByteArrayEntity(body));
         }
-        request.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
-        request.setHeader(new BasicHeader("Accept", "text/plain;charset=utf-8"));
         return httpClient.execute(request);
     }
 
@@ -229,12 +237,16 @@ public class HttpUtils {
                                      Map<String, String> queries,
                                      String body) throws Exception {
         HttpClient httpClient = wrapClient(host);
-        if (headers == null)
-            headers = new HashMap<>();
         if (queries == null)
             queries = new HashMap<>();
 
         HttpPut request = new HttpPut(buildUrl(host, path, queries));
+
+        if (headers == null) {
+            headers = new HashMap<>();
+            setHttpHeader(request);
+        }
+
         for (Map.Entry<String, String> e : headers.entrySet()) {
             request.addHeader(e.getKey(), e.getValue());
         }
@@ -242,8 +254,6 @@ public class HttpUtils {
         if (StringUtils.isNotBlank(body)) {
             request.setEntity(new StringEntity(body, "utf-8"));
         }
-        request.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
-        request.setHeader(new BasicHeader("Accept", "text/plain;charset=utf-8"));
         return httpClient.execute(request);
     }
 
@@ -263,12 +273,16 @@ public class HttpUtils {
                                      Map<String, String> queries,
                                      byte[] body) throws Exception {
         HttpClient httpClient = wrapClient(host);
-        if (headers == null)
-            headers = new HashMap<>();
         if (queries == null)
             queries = new HashMap<>();
 
         HttpPut request = new HttpPut(buildUrl(host, path, queries));
+
+        if (headers == null) {
+            headers = new HashMap<>();
+            setHttpHeader(request);
+        }
+
         for (Map.Entry<String, String> e : headers.entrySet()) {
             request.addHeader(e.getKey(), e.getValue());
         }
@@ -276,8 +290,6 @@ public class HttpUtils {
         if (body != null) {
             request.setEntity(new ByteArrayEntity(body));
         }
-        request.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
-        request.setHeader(new BasicHeader("Accept", "text/plain;charset=utf-8"));
         return httpClient.execute(request);
     }
 
@@ -295,17 +307,19 @@ public class HttpUtils {
                                         Map<String, String> headers,
                                         Map<String, String> queries) throws Exception {
         HttpClient httpClient = wrapClient(host);
-        if (headers == null)
-            headers = new HashMap<>();
         if (queries == null)
             queries = new HashMap<>();
 
         HttpDelete request = new HttpDelete(buildUrl(host, path, queries));
+
+        if (headers == null) {
+            headers = new HashMap<>();
+            setHttpHeader(request);
+        }
+
         for (Map.Entry<String, String> e : headers.entrySet()) {
             request.addHeader(e.getKey(), e.getValue());
         }
-        request.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
-        request.setHeader(new BasicHeader("Accept", "text/plain;charset=utf-8"));
         return httpClient.execute(request);
     }
 
@@ -371,9 +385,7 @@ public class HttpUtils {
             ClientConnectionManager ccm = httpClient.getConnectionManager();
             SchemeRegistry registry = ccm.getSchemeRegistry();
             registry.register(new Scheme("https", 443, ssf));
-        } catch (KeyManagementException ex) {
-            throw new RuntimeException(ex);
-        } catch (NoSuchAlgorithmException ex) {
+        } catch (KeyManagementException | NoSuchAlgorithmException ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -388,5 +400,10 @@ public class HttpUtils {
         } else {
             return "请求失败,错误码为: " + statusCode;
         }
+    }
+
+    private static HttpRequest setHttpHeader(HttpRequest request) {
+        request.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
+        return request;
     }
 }

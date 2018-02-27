@@ -20,8 +20,8 @@ import java.util.Map;
  */
 public class SmsUtils {
 
-    private static final String APPID = "*";
-    private static final String SIGNATURE = "*";
+    private static String APPID = "*";
+    private static String SIGNATURE = "*";
 
     public static String SendSms(String mobile, String context, String templates) {
         System.out.println("request context :" + context);
@@ -38,7 +38,7 @@ public class SmsUtils {
 
         try {
             HttpResponse response = HttpUtils.doPost(host, path, headers, queries, body);
-            String result = EntityUtils.toString(response.getEntity());
+            String result = EntityUtils.toString(response.getEntity(), "utf-8");
             System.out.println("sms response message: " + result);
             SmsResultVo vo = JsonUtils.toBean(result, SmsResultVo.class);
             if (vo.getStatus().equalsIgnoreCase("success"))
@@ -47,6 +47,14 @@ public class SmsUtils {
             e.printStackTrace();
         }
         return "error";
+    }
+
+    public static void setAPPID(String appId) {
+        APPID = appId;
+    }
+
+    public static void setSIGNATURE(String signature) {
+        SIGNATURE = signature;
     }
 
     public static class SmsResultVo {

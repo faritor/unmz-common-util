@@ -40,7 +40,9 @@ public class QueryExpInfoUtils {
         try {
             dto = getExpResultInfoDto(host, path, headers, queries);
             StringBuilder str = new StringBuilder();
-            dto.getResult().getList().forEach(list -> str.append(list.getTime()).append(" ").append(list.getStatus()).append("\n"));
+            for (ExpResultInfoVo.ExpResultListVo.ExpResultListResultVo list : dto.getResult().getList()) {
+                str.append(list.getTime()).append(" ").append(list.getStatus()).append("\n");
+            }
             return str.toString();
         } catch (Exception e) {
 
@@ -68,12 +70,13 @@ public class QueryExpInfoUtils {
             dto = getExpResultInfoDto(host, path, headers, queries);
             StringBuilder str = new StringBuilder();
 
-            dto.getResult().getList().forEach(list -> {
+            for (ExpResultInfoVo.ExpResultListVo.ExpResultListResultVo list : dto.getResult().getList()) {
                 StringBuilder strBuilder = new StringBuilder();
                 strBuilder.append(list.getTime()).append(" ").append(list.getStatus()).append("\n");
                 str.append(strBuilder);
                 arrayList.add(strBuilder.toString());
-            });
+            }
+
             return arrayList;
         } catch (Exception e) {
 
@@ -115,7 +118,9 @@ public class QueryExpInfoUtils {
         if (null == dto)
             return null;
         StringBuilder str = new StringBuilder();
-        dto.getResult().getList().forEach(list -> str.append(list.getTime()).append(" ").append(list.getStatus()).append("\n"));
+        for (ExpResultInfoVo.ExpResultListVo.ExpResultListResultVo list : dto.getResult().getList()) {
+            str.append(list.getTime()).append(" ").append(list.getStatus()).append("\n");
+        }
         return str.toString();
     }
 
@@ -132,7 +137,7 @@ public class QueryExpInfoUtils {
     public static ExpResultInfoVo getExpResultInfoDto(String host, String path, Map<String, String> headers, Map<String, String> queries) throws Exception {
         HttpResponse response = HttpUtils.doGet(host, path, headers, queries);
         //获取response的body
-        String result = EntityUtils.toString(response.getEntity());
+        String result = EntityUtils.toString(response.getEntity(), "utf-8");
         return JsonUtils.toBean(result, ExpResultInfoVo.class);
     }
 
