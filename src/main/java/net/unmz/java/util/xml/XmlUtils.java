@@ -9,6 +9,7 @@ package net.unmz.java.util.xml;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import net.unmz.java.util.json.JsonUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -186,5 +187,19 @@ public class XmlUtils {
         Element element = doc.getRootElement();
         return element;
     }
+
+    /**
+     * 将字符串XML内容解析并转换成字符串
+     * @param body Xml内容
+     * @param encode 编码
+     * @return
+     * @throws DocumentException
+     */
+    public static String toString(String body,String encode) throws DocumentException {
+        Element element = readerXml(body, encode);
+        Map<String, String> map = toMap(element);
+        return JsonUtils.MapToJSON(map);
+    }
+
 }
 
