@@ -13,7 +13,7 @@
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.4</version>
+        <version>1.0.5</version>
     </dependency>
 
 现已包含:
