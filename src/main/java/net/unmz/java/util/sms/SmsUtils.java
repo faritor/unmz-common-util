@@ -23,12 +23,10 @@ public class SmsUtils {
     private static String APPID = "*";
     private static String SIGNATURE = "*";
 
-    public static String SendSms(String mobile, String context, String templates) {
+    public static Boolean SendSms(String mobile, String context, String templates) {
         System.out.println("request context :" + context);
         String host = "https://api.mysubmail.com";
         String path = "/message/xsend";
-        Map<String, String> headers = new HashMap<>();
-        Map<String, String> queries = new HashMap<>();
         Map<String, String> body = new HashMap<>();
         body.put("appid", APPID);
         body.put("signature", SIGNATURE);
@@ -37,16 +35,15 @@ public class SmsUtils {
         body.put("vars", context);
 
         try {
-            HttpResponse response = HttpUtils.doPost(host, path, headers, queries, body);
-            String result = EntityUtils.toString(response.getEntity(), "utf-8");
+            String result = HttpUtils.doPost(host, path, null, null, body);
             System.out.println("sms response message: " + result);
             SmsResultVo vo = JsonUtils.toBean(result, SmsResultVo.class);
             if (vo.getStatus().equalsIgnoreCase("success"))
-                return "success";
+                return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "error";
+        return false;
     }
 
     public static void setAPPID(String appId) {
