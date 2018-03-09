@@ -35,7 +35,7 @@ public class SignUtils {
             StringBuilder buf = new StringBuilder((params.size() + 1) * 10);
             SignUtils.buildPayParams(buf, params, false);
             String preStr = buf.toString();
-            String signReceive = MD5.sign(preStr, "&key=" + key, "utf-8");
+            String signReceive = MD5Utils.sign(preStr, "&key=" + key, "utf-8");
             result = sign.equalsIgnoreCase(signReceive);
         }
         return result;

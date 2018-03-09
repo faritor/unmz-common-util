@@ -14,7 +14,7 @@ import java.security.SignatureException;
  * @date 2017-12-12 11:14
  * @since JDK 1.8
  */
-public class MD5 {
+public class MD5Utils {
 
     /**
      * 签名字符串
