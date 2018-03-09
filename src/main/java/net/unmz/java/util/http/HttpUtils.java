@@ -48,7 +48,7 @@ import java.util.Map;
  * @date 2017-12-09 20:30
  * @since JDK 1.8
  */
-public class HttpUtils<T> {
+public class HttpUtils {
 
     /**
      * Get方法
@@ -237,6 +237,23 @@ public class HttpUtils<T> {
      */
     public static String doPut(String host, String path,
                                Map<String, String> headers,
+                               Map<String, String> queries) throws Exception {
+        return doPut(host, path, headers, queries, "");
+    }
+
+    /**
+     * Put String
+     *
+     * @param host
+     * @param path
+     * @param headers
+     * @param queries
+     * @param body
+     * @return
+     * @throws Exception
+     */
+    public static String doPut(String host, String path,
+                               Map<String, String> headers,
                                Map<String, String> queries,
                                String body) throws Exception {
         HttpClient httpClient = wrapClient(host);
@@ -396,8 +413,7 @@ public class HttpUtils<T> {
         }
     }
 
-    private static HttpRequest setHttpHeader(HttpRequest request) {
+    private static void setHttpHeader(HttpRequest request) {
         request.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
-        return request;
     }
 }
