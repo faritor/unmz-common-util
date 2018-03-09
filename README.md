@@ -13,23 +13,22 @@
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.4</version>
+        <version>1.0.6</version>
     </dependency>
 
 现已包含:
 
-    1.时间处理Date
-    2.Http请求与响应
-    3.Json处理
-    4.Express快递第三方接口实现
-    5.SMS短信发送接口
-    6.图片和Base64互转
-    7.Map工具类
-    8.MD5工具类
-    9.Sign签名工具类
-    10.Xml工具类
-    11.网络IP获取工具类
-    12.图形验证码工具类
-    13.Unicode转换
-    14.自定义数字/字符串验证码生成
-    15.数组工具类
+    1.Http请求与响应
+    2.Json处理
+    3.SMS短信发送接口
+    4.图片和Base64互转
+    5.Map工具类
+    6.MD5工具类
+    7.Sign签名工具类
+    8.Xml工具类
+    9.网络IP获取工具类
+    10.图形验证码工具类
+    11.Unicode转换
+    12 .自定义数字/字符串验证码生成
+    13.数组工具类
+    14.Express快递第三方接口实现

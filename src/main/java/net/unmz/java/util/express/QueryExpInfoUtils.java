@@ -135,9 +135,8 @@ public class QueryExpInfoUtils {
      * @throws Exception
      */
     public static ExpResultInfoVo getExpResultInfoDto(String host, String path, Map<String, String> headers, Map<String, String> queries) throws Exception {
-        HttpResponse response = HttpUtils.doGet(host, path, headers, queries);
+        String result = HttpUtils.doGet(host, path, headers, queries);
         //获取response的body
-        String result = EntityUtils.toString(response.getEntity(), "utf-8");
         return JsonUtils.toBean(result, ExpResultInfoVo.class);
     }
 

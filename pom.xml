@@ -5,7 +5,7 @@
 
     <groupId>net.unmz.java</groupId>
     <artifactId>unmz-common-util</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.6</version>
     <packaging>jar</packaging>
 
     <name>unmz-common-util</name>
@@ -142,7 +142,7 @@
                                     <goal>jar</goal>
                                 </goals>
                                 <configuration>
-                                    <additionalparam>-Xdoclint:none</additionalparam>
+                                    <encoding>UTF-8</encoding>
                                 </configuration>
                             </execution>
                         </executions>
