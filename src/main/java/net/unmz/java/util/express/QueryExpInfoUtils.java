@@ -3,8 +3,6 @@ package net.unmz.java.util.express;
 import net.unmz.java.util.http.HttpUtils;
 import net.unmz.java.util.json.JsonUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.util.EntityUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;

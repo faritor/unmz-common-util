@@ -2,8 +2,6 @@ package net.unmz.java.util.sms;
 
 import net.unmz.java.util.http.HttpUtils;
 import net.unmz.java.util.json.JsonUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.util.EntityUtils;
 
 import java.util.HashMap;
 import java.util.Map;
