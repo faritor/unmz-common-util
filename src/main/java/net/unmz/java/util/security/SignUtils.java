@@ -7,6 +7,8 @@
 
 package net.unmz.java.util.security;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.net.URLEncoder;
 import java.util.*;
 
@@ -20,6 +22,24 @@ import java.util.*;
  * @since JDK 1.8
  */
 public class SignUtils {
+
+    public static String getSign(Map<String, String> params) {
+        Map<String, String> sortMap = new TreeMap<>(params);
+        // 以k1=v1&k2=v2...方式拼接参数
+        StringBuilder builder = new StringBuilder();
+        for (Map.Entry<String, String> s : sortMap.entrySet()) {
+            String k = s.getKey();
+            String v = s.getValue();
+            if (StringUtils.isBlank(v) || k.equalsIgnoreCase("sign")) {// 过滤空值
+                continue;
+            }
+            builder.append(k).append("=").append(v).append("&");
+        }
+        if (!sortMap.isEmpty()) {
+            builder.deleteCharAt(builder.length() - 1);
+        }
+        return builder.toString();
+    }
 
     /**
      * 验证返回参数
@@ -48,7 +68,7 @@ public class SignUtils {
      */
     public static Map<String, String> paraFilter(Map<String, String> sArray) {
         Map<String, String> result = new HashMap<>(sArray.size());
-        if (sArray == null || sArray.size() <= 0) {
+        if (sArray.size() <= 0) {
             return result;
         }
         for (String key : sArray.keySet()) {
