@@ -13,7 +13,7 @@
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.6</version>
+        <version>1.0.8</version>
     </dependency>
 
 现已包含:
@@ -32,3 +32,19 @@
     12 .自定义数字/字符串验证码生成
     13.数组工具类
     14.Express快递第三方接口实现
+    15.新增AES/RSA工具类
+
+更新日志:
+    
+1.0.8
+
+    1.新增AES/RSA工具类
+    2.更新SignUtils工具类
+    
+1.0.7
+    
+    更新时间工具类
+    
+1.0.0-1.0.6
+
+    已经记不清楚了...
