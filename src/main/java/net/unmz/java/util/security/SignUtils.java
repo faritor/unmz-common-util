@@ -42,7 +42,7 @@ public class SignUtils {
         return builder.toString();
     }
 
-    public boolean checkSign(String xmlString) {
+    public static boolean checkSign(String xmlString) {
         Map<String, String> map = null;
 
         try {
