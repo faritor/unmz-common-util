@@ -7,6 +7,7 @@
 
 package net.unmz.java.util.security;
 
+import net.unmz.java.util.xml.XmlUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.URLEncoder;
@@ -41,8 +42,36 @@ public class SignUtils {
         return builder.toString();
     }
 
+    public boolean checkSign(String xmlString) {
+        Map<String, String> map = null;
+
+        try {
+            map = XmlUtils.toMap(xmlString.getBytes(), "utf-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (map != null) {
+            String signFromAPIResponse = map.get("sign");
+            if (StringUtils.isBlank(signFromAPIResponse)) {
+                System.out.println("API返回的数据签名数据不存在，有可能被第三方篡改");
+                return false;
+            }
+            System.out.println("回调里面的签名是:" + signFromAPIResponse);
+            String signForAPIResponse = SignUtils.getSign(map);//将API返回的数据根据用签名算法进行计算新的签名，用来跟API返回的签名进行比较
+            if (!signForAPIResponse.equals(signFromAPIResponse)) {
+                System.out.println("API返回的数据签名验证不通过，有可能被第三方篡改 signForAPIResponse生成的签名为 " + signForAPIResponse);
+                return false;//签名验不过，表示这个API返回的数据有可能已经被篡改了
+            }
+            System.out.println("恭喜，API返回的数据签名验证通过");
+            return true;
+        }
+        System.out.println("解析xml为空，数据异常或被篡改");
+        return false;
+    }
+
     /**
      * 验证返回参数
+     *
      * @param params
      * @param key
      * @return
@@ -63,6 +92,7 @@ public class SignUtils {
 
     /**
      * 过滤参数
+     *
      * @param sArray
      * @return
      */
@@ -83,6 +113,7 @@ public class SignUtils {
 
     /**
      * 将map转成String
+     *
      * @param payParams
      * @return
      */
@@ -121,7 +152,6 @@ public class SignUtils {
             return str;
         }
     }
-
 
 
 }
