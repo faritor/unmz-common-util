@@ -6,7 +6,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -25,6 +25,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URLEncoder;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
@@ -86,7 +87,7 @@ public class HttpUtils {
     public static String doGet(String host, String path,
                                Map<String, String> headers,
                                Map<String, String> queries) throws Exception {
-        return EntityUtils.toString(doGetResponse(host,path,headers,queries).getEntity(), "utf-8");
+        return EntityUtils.toString(doGetResponse(host, path, headers, queries).getEntity(), "utf-8");
     }
 
     /**
@@ -100,8 +101,8 @@ public class HttpUtils {
      * @throws Exception
      */
     public static HttpResponse doGetResponse(String host, String path,
-                               Map<String, String> headers,
-                               Map<String, String> queries) throws Exception {
+                                             Map<String, String> headers,
+                                             Map<String, String> queries) throws Exception {
         HttpClient httpClient = wrapClient(host);
         if (queries == null)
             queries = new HashMap<>();
@@ -146,7 +147,7 @@ public class HttpUtils {
                                 Map<String, String> headers,
                                 Map<String, String> queries,
                                 Map<String, String> bodies) throws Exception {
-        return EntityUtils.toString(doPostResponse(host,path,headers,queries,bodies).getEntity(), "utf-8");
+        return EntityUtils.toString(doPostResponse(host, path, headers, queries, bodies).getEntity(), "utf-8");
     }
 
     /**
@@ -161,9 +162,9 @@ public class HttpUtils {
      * @throws Exception
      */
     public static HttpResponse doPostResponse(String host, String path,
-                                Map<String, String> headers,
-                                Map<String, String> queries,
-                                Map<String, String> bodies) throws Exception {
+                                              Map<String, String> headers,
+                                              Map<String, String> queries,
+                                              Map<String, String> bodies) throws Exception {
         HttpClient httpClient = wrapClient(host);
 
         if (queries == null)
@@ -208,13 +209,13 @@ public class HttpUtils {
                                 Map<String, String> headers,
                                 Map<String, String> queries,
                                 String body) throws Exception {
-        return EntityUtils.toString(doPostResponse(host,path,headers,queries,body).getEntity(), "utf-8");
+        return EntityUtils.toString(doPostResponse(host, path, headers, queries, body).getEntity(), "utf-8");
     }
 
     public static HttpResponse doPostResponse(String host, String path,
-                                Map<String, String> headers,
-                                Map<String, String> queries,
-                                String body) throws Exception {
+                                              Map<String, String> headers,
+                                              Map<String, String> queries,
+                                              String body) throws Exception {
         HttpClient httpClient = wrapClient(host);
         if (queries == null)
             queries = new HashMap<>();
@@ -251,7 +252,7 @@ public class HttpUtils {
                                 Map<String, String> headers,
                                 Map<String, String> queries,
                                 byte[] body) throws Exception {
-        return EntityUtils.toString(doPostResponse(host,path,headers,queries,body).getEntity(), "utf-8");
+        return EntityUtils.toString(doPostResponse(host, path, headers, queries, body).getEntity(), "utf-8");
     }
 
     /**
@@ -266,9 +267,9 @@ public class HttpUtils {
      * @throws Exception
      */
     public static HttpResponse doPostResponse(String host, String path,
-                                Map<String, String> headers,
-                                Map<String, String> queries,
-                                byte[] body) throws Exception {
+                                              Map<String, String> headers,
+                                              Map<String, String> queries,
+                                              byte[] body) throws Exception {
         HttpClient httpClient = wrapClient(host);
 
         if (queries == null)
@@ -321,8 +322,8 @@ public class HttpUtils {
      * @throws Exception
      */
     public static HttpResponse doPutResponse(String host, String path,
-                               Map<String, String> headers,
-                               Map<String, String> queries) throws Exception {
+                                             Map<String, String> headers,
+                                             Map<String, String> queries) throws Exception {
         return doPutResponse(host, path, headers, queries, "");
     }
 
@@ -342,7 +343,7 @@ public class HttpUtils {
                                Map<String, String> headers,
                                Map<String, String> queries,
                                String body) throws Exception {
-        return EntityUtils.toString(doPutResponse(host,path,headers,queries,body).getEntity(), "utf-8");
+        return EntityUtils.toString(doPutResponse(host, path, headers, queries, body).getEntity(), "utf-8");
     }
 
     /**
@@ -357,9 +358,9 @@ public class HttpUtils {
      * @throws Exception
      */
     public static HttpResponse doPutResponse(String host, String path,
-                               Map<String, String> headers,
-                               Map<String, String> queries,
-                               String body) throws Exception {
+                                             Map<String, String> headers,
+                                             Map<String, String> queries,
+                                             String body) throws Exception {
         HttpClient httpClient = wrapClient(host);
         if (queries == null)
             queries = new HashMap<>();
@@ -397,7 +398,7 @@ public class HttpUtils {
                                Map<String, String> headers,
                                Map<String, String> queries,
                                byte[] body) throws Exception {
-        return EntityUtils.toString(doPutResponse(host,path,headers,queries,body).getEntity(), "utf-8");
+        return EntityUtils.toString(doPutResponse(host, path, headers, queries, body).getEntity(), "utf-8");
     }
 
     /**
@@ -412,9 +413,9 @@ public class HttpUtils {
      * @throws Exception
      */
     public static HttpResponse doPutResponse(String host, String path,
-                               Map<String, String> headers,
-                               Map<String, String> queries,
-                               byte[] body) throws Exception {
+                                             Map<String, String> headers,
+                                             Map<String, String> queries,
+                                             byte[] body) throws Exception {
         HttpClient httpClient = wrapClient(host);
         if (queries == null)
             queries = new HashMap<>();
@@ -433,7 +434,7 @@ public class HttpUtils {
         if (body != null) {
             request.setEntity(new ByteArrayEntity(body));
         }
-        return  httpClient.execute(request);
+        return httpClient.execute(request);
     }
 
     /**
@@ -449,7 +450,41 @@ public class HttpUtils {
     public static String doDelete(String host, String path,
                                   Map<String, String> headers,
                                   Map<String, String> queries) throws Exception {
-        return EntityUtils.toString(doDeleteResponse(host,path,headers,queries).getEntity(), "utf-8");
+        return EntityUtils.toString(doDeleteResponse(host, path, headers, queries).getEntity(), "utf-8");
+    }
+
+    /**
+     * Delete
+     *
+     * @param host
+     * @param path
+     * @param headers
+     * @param queries
+     * @return
+     * @throws Exception
+     */
+    public static String doDelete(String host, String path,
+                                  Map<String, String> headers,
+                                  Map<String, String> queries,
+                                  String body) throws Exception {
+        return EntityUtils.toString(doDeleteResponse(host, path, headers, queries, body).getEntity(), "utf-8");
+    }
+
+    /**
+     * Delete
+     *
+     * @param host
+     * @param path
+     * @param headers
+     * @param queries
+     * @return
+     * @throws Exception
+     */
+    public static String doDelete(String host, String path,
+                                  Map<String, String> headers,
+                                  Map<String, String> queries,
+                                  Map<String, String> body) throws Exception {
+        return EntityUtils.toString(doDeleteResponse(host, path, headers, queries, body).getEntity(), "utf-8");
     }
 
     /**
@@ -463,13 +498,30 @@ public class HttpUtils {
      * @throws Exception
      */
     public static HttpResponse doDeleteResponse(String host, String path,
-                                  Map<String, String> headers,
-                                  Map<String, String> queries) throws Exception {
+                                                Map<String, String> headers,
+                                                Map<String, String> queries) throws Exception {
+        return doDeleteResponse(host, path, headers, queries, "");
+    }
+
+    /**
+     * Delete
+     *
+     * @param host
+     * @param path
+     * @param headers
+     * @param queries
+     * @return
+     * @throws Exception
+     */
+    public static HttpResponse doDeleteResponse(String host, String path,
+                                                Map<String, String> headers,
+                                                Map<String, String> queries,
+                                                String body) throws Exception {
         HttpClient httpClient = wrapClient(host);
         if (queries == null)
             queries = new HashMap<>();
 
-        HttpDelete request = new HttpDelete(buildUrl(host, path, queries));
+        HttpDeleteWithBody request = new HttpDeleteWithBody(buildUrl(host, path, queries));
 
         if (headers == null) {
             headers = new HashMap<>();
@@ -478,6 +530,53 @@ public class HttpUtils {
 
         for (Map.Entry<String, String> e : headers.entrySet()) {
             request.addHeader(e.getKey(), e.getValue());
+        }
+
+        if (StringUtils.isNotBlank(body)) {
+            request.setEntity(new StringEntity(body, "utf-8"));
+        }
+
+        return httpClient.execute(request);
+    }
+
+    /**
+     * Delete
+     *
+     * @param host
+     * @param path
+     * @param headers
+     * @param queries
+     * @return
+     * @throws Exception
+     */
+    public static HttpResponse doDeleteResponse(String host, String path,
+                                                Map<String, String> headers,
+                                                Map<String, String> queries,
+                                                Map<String, String> bodies) throws Exception {
+        HttpClient httpClient = wrapClient(host);
+        if (queries == null)
+            queries = new HashMap<>();
+
+        HttpDeleteWithBody request = new HttpDeleteWithBody(buildUrl(host, path, queries));
+
+        if (headers == null) {
+            headers = new HashMap<>();
+            setHttpHeader(request);
+        }
+
+        for (Map.Entry<String, String> e : headers.entrySet()) {
+            request.addHeader(e.getKey(), e.getValue());
+        }
+
+        if (bodies != null) {
+            List<NameValuePair> nameValuePairList = new ArrayList<>();
+
+            for (String key : bodies.keySet()) {
+                nameValuePairList.add(new BasicNameValuePair(key, bodies.get(key)));
+            }
+            UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(nameValuePairList, "utf-8");
+            formEntity.setContentType("application/x-www-form-urlencoded; charset=UTF-8");
+            request.setEntity(formEntity);
         }
         return httpClient.execute(request);
     }
@@ -551,5 +650,27 @@ public class HttpUtils {
 
     private static void setHttpHeader(HttpRequest request) {
         request.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
+    }
+
+    static class HttpDeleteWithBody extends HttpEntityEnclosingRequestBase {
+        static final String METHOD_NAME = "DELETE";
+
+        public String getMethod() {
+            return METHOD_NAME;
+        }
+
+        HttpDeleteWithBody(final String uri) {
+            super();
+            setURI(URI.create(uri));
+        }
+
+        public HttpDeleteWithBody(final URI uri) {
+            super();
+            setURI(uri);
+        }
+
+        public HttpDeleteWithBody() {
+            super();
+        }
     }
 }
