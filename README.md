@@ -14,7 +14,7 @@
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.9</version>
+        <version>1.0.10</version>
     </dependency>
 
 现已包含:
@@ -36,7 +36,11 @@
     15.新增AES/RSA工具类
 
 更新日志:
+
+1.0.10
     
+    新增delete方式请求时，可加参数
+        
 1.0.9
     
     更新SignUtils工具类，新增验签方法
