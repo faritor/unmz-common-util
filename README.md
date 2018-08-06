@@ -14,7 +14,7 @@
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.10</version>
+        <version>1.0.11</version>
     </dependency>
 
 现已包含:
@@ -36,6 +36,10 @@
     15.新增AES/RSA工具类
 
 更新日志:
+1.0.11
+
+    修复httpUtil部分请求时参数异常的问题
+
 
 1.0.10
     

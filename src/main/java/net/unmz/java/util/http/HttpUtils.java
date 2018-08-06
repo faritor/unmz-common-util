@@ -1,5 +1,6 @@
 package net.unmz.java.util.http;
 
+import net.unmz.java.util.json.JsonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
@@ -147,51 +148,7 @@ public class HttpUtils {
                                 Map<String, String> headers,
                                 Map<String, String> queries,
                                 Map<String, String> bodies) throws Exception {
-        return EntityUtils.toString(doPostResponse(host, path, headers, queries, bodies).getEntity(), "utf-8");
-    }
-
-    /**
-     * post form
-     *
-     * @param host
-     * @param path
-     * @param headers
-     * @param queries
-     * @param bodies
-     * @return
-     * @throws Exception
-     */
-    public static HttpResponse doPostResponse(String host, String path,
-                                              Map<String, String> headers,
-                                              Map<String, String> queries,
-                                              Map<String, String> bodies) throws Exception {
-        HttpClient httpClient = wrapClient(host);
-
-        if (queries == null)
-            queries = new HashMap<>();
-
-        HttpPost request = new HttpPost(buildUrl(host, path, queries));
-
-        if (headers == null) {
-            headers = new HashMap<>();
-            setHttpHeader(request);
-        }
-
-        for (Map.Entry<String, String> e : headers.entrySet()) {
-            request.addHeader(e.getKey(), e.getValue());
-        }
-
-        if (bodies != null) {
-            List<NameValuePair> nameValuePairList = new ArrayList<>();
-
-            for (String key : bodies.keySet()) {
-                nameValuePairList.add(new BasicNameValuePair(key, bodies.get(key)));
-            }
-            UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(nameValuePairList, "utf-8");
-            formEntity.setContentType("application/x-www-form-urlencoded; charset=UTF-8");
-            request.setEntity(formEntity);
-        }
-        return httpClient.execute(request);
+        return EntityUtils.toString(doPostResponse(host, path, headers, queries, JsonUtils.toJSON(bodies)).getEntity(), "utf-8");
     }
 
     /**
@@ -484,7 +441,7 @@ public class HttpUtils {
                                   Map<String, String> headers,
                                   Map<String, String> queries,
                                   Map<String, String> body) throws Exception {
-        return EntityUtils.toString(doDeleteResponse(host, path, headers, queries, body).getEntity(), "utf-8");
+        return EntityUtils.toString(doDeleteResponse(host, path, headers, queries, JsonUtils.toJSON(body)).getEntity(), "utf-8");
     }
 
     /**
@@ -536,48 +493,6 @@ public class HttpUtils {
             request.setEntity(new StringEntity(body, "utf-8"));
         }
 
-        return httpClient.execute(request);
-    }
-
-    /**
-     * Delete
-     *
-     * @param host
-     * @param path
-     * @param headers
-     * @param queries
-     * @return
-     * @throws Exception
-     */
-    public static HttpResponse doDeleteResponse(String host, String path,
-                                                Map<String, String> headers,
-                                                Map<String, String> queries,
-                                                Map<String, String> bodies) throws Exception {
-        HttpClient httpClient = wrapClient(host);
-        if (queries == null)
-            queries = new HashMap<>();
-
-        HttpDeleteWithBody request = new HttpDeleteWithBody(buildUrl(host, path, queries));
-
-        if (headers == null) {
-            headers = new HashMap<>();
-            setHttpHeader(request);
-        }
-
-        for (Map.Entry<String, String> e : headers.entrySet()) {
-            request.addHeader(e.getKey(), e.getValue());
-        }
-
-        if (bodies != null) {
-            List<NameValuePair> nameValuePairList = new ArrayList<>();
-
-            for (String key : bodies.keySet()) {
-                nameValuePairList.add(new BasicNameValuePair(key, bodies.get(key)));
-            }
-            UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(nameValuePairList, "utf-8");
-            formEntity.setContentType("application/x-www-form-urlencoded; charset=UTF-8");
-            request.setEntity(formEntity);
-        }
         return httpClient.execute(request);
     }
 
@@ -649,7 +564,7 @@ public class HttpUtils {
     }
 
     private static void setHttpHeader(HttpRequest request) {
-        request.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
+        request.setHeader(new BasicHeader("Content-Type", "application/json;charset=utf-8"));
     }
 
     static class HttpDeleteWithBody extends HttpEntityEnclosingRequestBase {
