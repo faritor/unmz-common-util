@@ -14,7 +14,7 @@
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.11</version>
+        <version>1.0.12</version>
     </dependency>
 
 现已包含:
@@ -30,15 +30,22 @@
     9.网络IP获取工具类
     10.图形验证码工具类
     11.Unicode转换
-    12 .自定义数字/字符串验证码生成
+    12.自定义数字/字符串验证码生成
     13.数组工具类
     14.Express快递第三方接口实现
-    15.新增AES/RSA工具类
+    15.AES/RSA工具类
+    16.UUID工具类
 
 更新日志:
+1.0.12
+
+    1.修复XmlUtils工具类可以会导致XXE的问题
+    2.修复DateUtils计算两天之间的差值精度问题
+
 1.0.11
 
-    修复httpUtil部分请求时参数异常的问题
+    1.修复httpUtil部分请求时参数异常的问题
+    2.新增UUID工具类
 
 
 1.0.10

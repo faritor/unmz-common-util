@@ -190,24 +190,11 @@ public class DateUtils {
         caled.set(java.util.GregorianCalendar.HOUR_OF_DAY, 0);
         caled.set(java.util.GregorianCalendar.MINUTE, 0);
         caled.set(java.util.GregorianCalendar.SECOND, 0);
-        // startdate.setHours(0);
-        // startdate.setMinutes(0);
-        // startdate.setSeconds(0);
-        // enddate.setHours(0);
-        // enddate.setMinutes(0);
-        // enddate.setSeconds(0);
 
         // 得到两个日期相差的天数
-        int days = ((int) (caled.getTime().getTime() / 1000) - (int) (calst
-                .getTime().getTime() / 1000)) / 3600 / 24;
+        int days = ((int) (caled.getTime().getTime() / 1000 / 3600 / 24) - (int) (calst
+                .getTime().getTime() / 1000 / 3600 / 24));
         return days;
-
-        // Calendar c1 = Calendar.getInstance();
-        // Calendar c2 = Calendar.getInstance();
-        // c1.setTime(early);
-        // c2.setTime(late);
-
-        // return daysBetween(c1, c2);
     }
 
     /**

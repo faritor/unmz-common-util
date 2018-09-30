@@ -15,6 +15,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -123,6 +124,7 @@ public class XmlUtils {
      */
     public static Map<String, String> toMap(byte[] xmlBytes, String charset) throws Exception {
         SAXReader reader = new SAXReader(false);
+        reader.setFeature("http://apache.org/xml/features/disallow-doctype-decl",true);
         InputSource source = new InputSource(new ByteArrayInputStream(xmlBytes));
         source.setEncoding(charset);
         Document doc = reader.read(source);
@@ -179,8 +181,9 @@ public class XmlUtils {
         return obj;
     }
 
-    public static Element readerXml(String body, String encode) throws DocumentException {
+    public static Element readerXml(String body, String encode) throws DocumentException, SAXException {
         SAXReader reader = new SAXReader(false);
+        reader.setFeature("http://apache.org/xml/features/disallow-doctype-decl",true);
         InputSource source = new InputSource(new StringReader(body));
         source.setEncoding(encode);
         Document doc = reader.read(source);
@@ -195,7 +198,7 @@ public class XmlUtils {
      * @return
      * @throws DocumentException
      */
-    public static String toString(String body,String encode) throws DocumentException {
+    public static String toString(String body,String encode) throws DocumentException, SAXException {
         Element element = readerXml(body, encode);
         Map<String, String> map = toMap(element);
         return JsonUtils.MapToJSON(map);
