@@ -14,7 +14,7 @@
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.11</version>
+        <version>1.0.12</version>
     </dependency>
 
 现已包含:
@@ -37,6 +37,11 @@
     16.UUID工具类
 
 更新日志:
+1.0.12
+
+    1.修复XmlUtils工具类可以会导致XXE的问题
+    2.修复DateUtils计算两天之间的差值精度问题
+
 1.0.11
 
     1.修复httpUtil部分请求时参数异常的问题
