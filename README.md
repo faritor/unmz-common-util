@@ -14,7 +14,7 @@
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.12</version>
+        <version>1.0.13</version>
     </dependency>
 
 现已包含:
@@ -35,8 +35,14 @@
     14.Express快递第三方接口实现
     15.AES/RSA工具类
     16.UUID工具类
+    17.对象属性可否为空,长度等校验
 
 更新日志:
+1.0.13
+
+    新增自定义注解,校验入参中属性的合法性
+
+
 1.0.12
 
     1.修复XmlUtils工具类可以会导致XXE的问题
