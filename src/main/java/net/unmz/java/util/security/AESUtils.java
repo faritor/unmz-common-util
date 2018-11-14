@@ -3,6 +3,7 @@ package net.unmz.java.util.security;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.SecureRandom;
 
@@ -63,4 +64,25 @@ public class AESUtils {
         return null;
     }
 
+    /**
+     * AES 解密
+     * @param key
+     * @param encryptedData
+     * @param iv
+     * @return
+     * @throws Exception
+     */
+    public static String decryptData(String key, String encryptedData, String iv) throws Exception {
+        byte[] sessionKeyArray = Base64Utils.getInstance().decoder(key);
+        byte[] encryptedDataArray = Base64Utils.getInstance().decoder(encryptedData);
+        byte[] ivArray = Base64Utils.getInstance().decoder(iv);
+
+        SecretKeySpec secretKey = new SecretKeySpec(sessionKeyArray, "AES");
+        byte[] enCodeFormat = secretKey.getEncoded();
+        SecretKeySpec secKey = new SecretKeySpec(enCodeFormat, "AES");
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");// 创建密码器
+        cipher.init(Cipher.DECRYPT_MODE, secKey, new IvParameterSpec(ivArray));// 初始化
+        byte[] result = cipher.doFinal(encryptedDataArray);
+        return new String(result);
+    }
 }
