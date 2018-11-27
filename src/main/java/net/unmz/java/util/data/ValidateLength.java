@@ -11,7 +11,7 @@ import java.lang.annotation.*;
  * @date 2018-10-15 11:41
  * @since JDK 1.8
  */
-@Target({ElementType.FIELD, ElementType.TYPE})
+@Target({ElementType.FIELD, ElementType.TYPE, ElementType.PARAMETER})
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
