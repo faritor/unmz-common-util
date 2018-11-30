@@ -82,6 +82,13 @@
             <artifactId>xstream</artifactId>
             <version>1.4.9</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.51</version>
+        </dependency>
+
     </dependencies>
 
     <build>
