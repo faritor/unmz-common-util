@@ -24,7 +24,7 @@ public class MapUtils {
      * @throws Exception
      */
     public static Map<String, String> objectToMap(Object obj) throws Exception {
-        if(null != obj) {
+        if (null != obj) {
             Map<String, String> map = new HashMap();
             BeanInfo beanInfo = Introspector.getBeanInfo(obj.getClass());
             PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
@@ -34,7 +34,9 @@ public class MapUtils {
                     continue;
                 }
                 Method getter = property.getReadMethod();
-                String value = getter!=null ? getter.invoke(obj).toString() : null;
+                String value = null;
+                if (getter != null)
+                    value = getter.invoke(obj) != null ? getter.invoke(obj).toString() : null;
                 map.put(key, value);
             }
             return map;

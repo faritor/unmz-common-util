@@ -14,7 +14,7 @@
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.13</version>
+        <version>1.0.14</version>
     </dependency>
 
 现已包含:
@@ -38,6 +38,12 @@
     17.对象属性可否为空,长度等校验
 
 更新日志:
+
+1.0.14
+
+    自定义校验接口扩展为可用于参数列表中校验
+    更新AES工具类
+    
 
 1.0.13
 
