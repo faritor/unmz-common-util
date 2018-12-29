@@ -257,7 +257,6 @@ public class HttpUtils {
      * @param path
      * @param headers
      * @param queries
-     * @param body
      * @return
      * @throws Exception
      */
@@ -274,7 +273,6 @@ public class HttpUtils {
      * @param path
      * @param headers
      * @param queries
-     * @param body
      * @return
      * @throws Exception
      */
@@ -588,4 +586,5 @@ public class HttpUtils {
             super();
         }
     }
+
 }
