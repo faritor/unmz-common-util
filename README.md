@@ -38,9 +38,10 @@
 
 #### 更新日志:
 
-##### v1.0.15
+##### 2019-06-28 v1.0.15
 
     优化调整AES工具类
+    升级fastjson工具类[FastJSON远程代码执行0day漏洞](https://helpcdn.aliyun.com/document_detail/123431.html)
 
 
 ##### 2018-12-19 v1.0.14
