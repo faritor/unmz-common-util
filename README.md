@@ -13,7 +13,7 @@
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.15</version>
+        <version>1.0.16</version>
     </dependency>
 
 现已包含:
@@ -37,6 +37,10 @@
     17.对象属性可否为空,长度等校验
 
 #### 更新日志:
+
+##### 2019-09-16 v1.0.16
+
+    升级fastjson依赖包
 
 ##### 2019-06-28 v1.0.15
 
