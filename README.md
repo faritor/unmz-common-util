@@ -13,7 +13,7 @@
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.16</version>
+        <version>1.0.17</version>
     </dependency>
 
 现已包含:
@@ -37,6 +37,10 @@
     17.对象属性可否为空,长度等校验
 
 #### 更新日志:
+
+##### 2020-02-21 v1.0.17
+
+    更新XmlUtil的toBean和toString方法,新增toJsonString
 
 ##### 2019-09-16 v1.0.16
 

@@ -5,7 +5,7 @@
 
     <groupId>net.unmz.java</groupId>
     <artifactId>unmz-common-util</artifactId>
-    <version>1.0.16</version>
+    <version>1.0.17</version>
     <packaging>jar</packaging>
 
     <name>unmz-common-util</name>
@@ -16,8 +16,6 @@
         <java.version>1.7</java.version>
         <default.charset>UTF-8</default.charset>
         <project.build.sourceEncoding>${default.charset}</project.build.sourceEncoding>
-        <maven.nexus.releases.id>SHZX</maven.nexus.releases.id>
-        <maven.nexus.releases.url>http://192.168.1.14:8081/nexus/content/repositories/releases</maven.nexus.releases.url>
     </properties>
     <licenses>
         <license>
@@ -103,28 +101,21 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <encoding>${default.charset}</encoding>
+                    <compilerArguments>
+                        <verbose/>
+                        <bootclasspath>${java.home}/lib/rt.jar;${java.home}/lib/jce.jar</bootclasspath>
+                    </compilerArguments>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
     <profiles>
-        <profile>
-            <id>deploy</id>
-            <properties>
-                <profile-id>deploy</profile-id>
-            </properties>
-            <distributionManagement>
-                <repository>
-                    <id>${maven.nexus.releases.id}</id>
-                    <url>${maven.nexus.releases.url}</url>
-                </repository>
-            </distributionManagement>
-        </profile>
         <profile>
             <id>release</id>
             <build>
@@ -148,6 +139,10 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>2.9.1</version>
+                        <configuration>
+                            <show>package</show>
+                            <additionalparam>-Xdoclint:none</additionalparam>
+                        </configuration>
                         <executions>
                             <execution>
                                 <phase>package</phase>
@@ -164,7 +159,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
+                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <phase>verify</phase>

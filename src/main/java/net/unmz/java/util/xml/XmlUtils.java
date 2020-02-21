@@ -28,12 +28,12 @@ import java.util.*;
  * @author faritor@unmz.net
  * @version 1.0
  * @since JDK 1.8
- *
  */
 public class XmlUtils {
 
     /**
      * request转字符串
+     *
      * @param request
      * @return
      */
@@ -124,7 +124,7 @@ public class XmlUtils {
      */
     public static Map<String, String> toMap(byte[] xmlBytes, String charset) throws Exception {
         SAXReader reader = new SAXReader(false);
-        reader.setFeature("http://apache.org/xml/features/disallow-doctype-decl",true);
+        reader.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
         InputSource source = new InputSource(new ByteArrayInputStream(xmlBytes));
         source.setEncoding(charset);
         Document doc = reader.read(source);
@@ -162,28 +162,54 @@ public class XmlUtils {
         return buf.toString();
     }
 
-
     /**
-     *  将传入xml文本转换成Java对象
+     * 将传入xml文本转换成Java对象
+     *
+     * @param xmlStr
+     * @param cls    xml对应的class类
+     * @return T   xml对应的class类的实例对象
+     * <p>
+     * 调用的方法实例：PersonBean person=XmlUtil.toBean(xmlStr, PersonBean.class);
      * @Title: toBean
      * @Description: TODO
-     * @param xmlStr
-     * @param cls  xml对应的class类
-     * @return T   xml对应的class类的实例对象
-     *
-     * 调用的方法实例：PersonBean person=XmlUtil.toBean(xmlStr, PersonBean.class);
      */
-    public static <T> T  toBean(String xmlStr,Class<T> cls){
-        //注意：不是new Xstream(); 否则报错：java.lang.NoClassDefFoundError: org/xmlpull/v1/XmlPullParserFactory
-        XStream xstream= new XStream(new DomDriver());
+    public static <T> T toBean(String xmlStr, Class<T> cls) {
+        return toBean(xmlStr, cls, "xml");
+    }
+
+    /**
+     * 将传入xml文本转换成Java对象
+     *
+     * @param xmlStr
+     * @param cls    xml对应的class类
+     * @return T   xml对应的class类的实例对象
+     * <p>
+     * 调用的方法实例：PersonBean person=XmlUtil.toBean(xmlStr, PersonBean.class);
+     * @Title: toBean
+     * @Description: TODO
+     */
+    public static <T> T toBean(String xmlStr, Class<T> cls, String rootName) {
+        XStream xstream = new XStream(new DomDriver());
         xstream.processAnnotations(cls);
-        T obj=(T)xstream.fromXML(xmlStr);
+        xstream.alias(rootName, cls);
+        T obj = (T) xstream.fromXML(xmlStr);
         return obj;
+    }
+
+    /**
+     * 将传入xml文本转换成Java对象
+     *
+     * @param object
+     * @return
+     */
+    public static String toString(Object object) {
+        XStream xstream = new XStream(new DomDriver());
+        return xstream.toXML(object);
     }
 
     public static Element readerXml(String body, String encode) throws DocumentException, SAXException {
         SAXReader reader = new SAXReader(false);
-        reader.setFeature("http://apache.org/xml/features/disallow-doctype-decl",true);
+        reader.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
         InputSource source = new InputSource(new StringReader(body));
         source.setEncoding(encode);
         Document doc = reader.read(source);
@@ -193,12 +219,13 @@ public class XmlUtils {
 
     /**
      * 将字符串XML内容解析并转换成字符串
-     * @param body Xml内容
+     *
+     * @param body   Xml内容
      * @param encode 编码
      * @return
      * @throws DocumentException
      */
-    public static String toString(String body,String encode) throws DocumentException, SAXException {
+    public static String toJsonString(String body, String encode) throws DocumentException, SAXException {
         Element element = readerXml(body, encode);
         Map<String, String> map = toMap(element);
         return JsonUtils.MapToJSON(map);
