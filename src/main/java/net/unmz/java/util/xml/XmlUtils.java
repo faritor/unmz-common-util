@@ -207,6 +207,20 @@ public class XmlUtils {
         return xstream.toXML(object);
     }
 
+    /**
+     * 将字符串XML内容解析并转换成字符串
+     *
+     * @param body   Xml内容
+     * @param encode 编码
+     * @return
+     * @throws DocumentException
+     */
+    public static String toString(String body, String encode) throws DocumentException, SAXException {
+        Element element = readerXml(body, encode);
+        Map<String, String> map = toMap(element);
+        return JsonUtils.MapToJSON(map);
+    }
+
     public static Element readerXml(String body, String encode) throws DocumentException, SAXException {
         SAXReader reader = new SAXReader(false);
         reader.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
