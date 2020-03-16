@@ -13,7 +13,7 @@
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.17</version>
+        <version>1.0.18</version>
     </dependency>
 
 现已包含:
@@ -37,6 +37,14 @@
     17.对象属性可否为空,长度等校验
 
 #### 更新日志:
+
+##### 2020-03-16 v1.0.19
+
+    更新AES工具类
+
+##### 2020-02-22 v1.0.18
+
+    更新XmlUtils兼容旧版本toString方法
 
 ##### 2020-02-21 v1.0.17
 
