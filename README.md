@@ -13,7 +13,7 @@
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.19</version>
+        <version>1.0.20</version>
     </dependency>
 
 现已包含:
@@ -37,6 +37,10 @@
     17.对象属性可否为空,长度等校验
 
 #### 更新日志:
+
+##### 2020-03 v1.0.20
+    
+    新增SHA1工具类
 
 ##### 2020-03-16 v1.0.19
 
