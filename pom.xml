@@ -5,7 +5,7 @@
 
     <groupId>net.unmz.java</groupId>
     <artifactId>unmz-common-util</artifactId>
-    <version>1.0.19</version>
+    <version>1.0.20</version>
     <packaging>jar</packaging>
 
     <name>unmz-common-util</name>
@@ -53,7 +53,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.60</version>
+            <version>1.2.67</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -80,10 +80,17 @@
             <artifactId>xstream</artifactId>
             <version>1.4.9</version>
         </dependency>
+        <!-- AES -->
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15on</artifactId>
             <version>1.51</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.2.12</version>
         </dependency>
 
     </dependencies>
