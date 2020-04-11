@@ -1,6 +1,12 @@
 # unmz-common-util
 常用的Java工具类
 
+
+[![Build Status](https://travis-ci.org/FaritorKang/unmz-common-util.svg?branch=master)](https://travis-ci.org/FaritorKang/unmz-common-util)
+[![license](https://img.shields.io/github/license/FaritorKang/unmz-common-util.svg)](https://opensource.org/licenses/MIT)
+[![maven](https://img.shields.io/maven-central/v/net.unmz.java/unmz-common-util.svg)](https://search.maven.org/artifact/net.unmz.java/unmz-common-util)
+
+
 **本工具中的方法有部分采自网络，用与归纳整理，如有侵权，请联系我**
 
 ~~项目基于JDK1.8编译，在选择使用时，请考虑版本冲突问题。~~
