@@ -19,7 +19,7 @@
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.20</version>
+        <version>1.0.21</version>
     </dependency>
 
 现已包含:
@@ -43,6 +43,10 @@
     17.对象属性可否为空,长度等校验
 
 #### 更新日志:
+
+##### 2020-04-13 v1.0.21
+
+    移除JsonUtils工具类static静态代码块中的时间配置
 
 ##### 2020-03-27 v1.0.20
     
