@@ -5,7 +5,7 @@
 
     <groupId>net.unmz.java</groupId>
     <artifactId>unmz-common-util</artifactId>
-    <version>1.0.21</version>
+    <version>1.0.22</version>
     <packaging>jar</packaging>
 
     <name>unmz-common-util</name>
@@ -13,9 +13,27 @@
     <description>Util project for Java</description>
 
     <properties>
-        <java.version>1.7</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <java.version>1.8</java.version>
         <default.charset>UTF-8</default.charset>
-        <project.build.sourceEncoding>${default.charset}</project.build.sourceEncoding>
+
+        <maven-jar-plugin.version>2.4</maven-jar-plugin.version>
+        <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+        <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
+        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+
+        <fastjson.version>1.2.71</fastjson.version>
+        <httpclient.version>4.5.3</httpclient.version>
+        <commons-lang3.version>3.5</commons-lang3.version>
+        <dom4j.version>1.6.1</dom4j.version>
+        <servlet-api.version>2.5</servlet-api.version>
+        <xstream.version>1.4.9</xstream.version>
+        <bcprov-jdk15on.version>1.51</bcprov-jdk15on.version>
+        <cglib.version>3.2.12</cglib.version>
     </properties>
     <licenses>
         <license>
@@ -50,47 +68,54 @@
     </scm>
 
     <dependencies>
+
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.67</version>
+            <version>${fastjson.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.3</version>
+            <version>${httpclient.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.5</version>
+            <version>${commons-lang3.version}</version>
         </dependency>
+
         <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
-            <version>1.6.1</version>
+            <version>${dom4j.version}</version>
         </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <version>${servlet-api.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
-            <version>1.4.9</version>
+            <version>${xstream.version}</version>
         </dependency>
+
         <!-- AES -->
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15on</artifactId>
-            <version>1.51</version>
+            <version>${bcprov-jdk15on.version}</version>
         </dependency>
 
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
-            <version>3.2.12</version>
+            <version>${cglib.version}</version>
         </dependency>
 
     </dependencies>
@@ -100,7 +125,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
+                <version>${maven-jar-plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>compile</phase>
@@ -113,10 +138,8 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
                     <encoding>${default.charset}</encoding>
                     <compilerArgument>-XDignore.symbol.file</compilerArgument>
                     <compilerArguments>
@@ -137,7 +160,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>2.2.1</version>
+                        <version>${maven-source-plugin.version}</version>
                         <executions>
                             <execution>
                                 <phase>package</phase>
@@ -151,7 +174,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>2.9.1</version>
+                        <version>${maven-javadoc-plugin.version}</version>
                         <configuration>
                             <show>package</show>
                             <additionalparam>-Xdoclint:none</additionalparam>
@@ -163,7 +186,7 @@
                                     <goal>jar</goal>
                                 </goals>
                                 <configuration>
-                                    <encoding>UTF-8</encoding>
+                                    <encoding>${default.charset}</encoding>
                                 </configuration>
                             </execution>
                         </executions>
@@ -172,7 +195,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
+                        <version>${maven-gpg-plugin.version}</version>
                         <executions>
                             <execution>
                                 <phase>verify</phase>

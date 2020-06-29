@@ -19,7 +19,7 @@
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.21</version>
+        <version>1.0.22</version>
     </dependency>
 
 现已包含:
@@ -43,6 +43,11 @@
     17.对象属性可否为空,长度等校验
 
 #### 更新日志:
+
+##### 2020-06-25 v1.0.22
+
+    [M]完善随机字符串工具类
+    [M]升级fastjson版本
 
 ##### 2020-04-13 v1.0.21
 
