@@ -5,7 +5,7 @@
 
     <groupId>net.unmz.java</groupId>
     <artifactId>unmz-common-util</artifactId>
-    <version>1.0.22</version>
+    <version>1.0.23</version>
     <packaging>jar</packaging>
 
     <name>unmz-common-util</name>
@@ -26,7 +26,7 @@
         <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
 
-        <fastjson.version>1.2.71</fastjson.version>
+        <fastjson.version>1.2.73</fastjson.version>
         <httpclient.version>4.5.3</httpclient.version>
         <commons-lang3.version>3.5</commons-lang3.version>
         <dom4j.version>1.6.1</dom4j.version>

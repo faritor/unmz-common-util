@@ -1,25 +1,18 @@
 # unmz-common-util
 常用的Java工具类
 
-
-[![Build Status](https://travis-ci.org/FaritorKang/unmz-common-util.svg?branch=master)](https://travis-ci.org/FaritorKang/unmz-common-util)
 [![license](https://img.shields.io/github/license/FaritorKang/unmz-common-util.svg)](https://opensource.org/licenses/MIT)
 [![maven](https://img.shields.io/maven-central/v/net.unmz.java/unmz-common-util.svg)](https://search.maven.org/artifact/net.unmz.java/unmz-common-util)
 
 
 **本工具中的方法有部分采自网络，用与归纳整理，如有侵权，请联系我**
 
-~~项目基于JDK1.8编译，在选择使用时，请考虑版本冲突问题。~~
-
-
-项目现已降级，改为1.7编译。
-
 项目现已发布依赖地址:
 
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.22</version>
+        <version>1.0.23</version>
     </dependency>
 
 现已包含:
@@ -43,6 +36,10 @@
     17.对象属性可否为空,长度等校验
 
 #### 更新日志:
+
+##### 2020-08-19 v1.0.23
+
+    [M]升级fastjson版本
 
 ##### 2020-06-25 v1.0.22
 
