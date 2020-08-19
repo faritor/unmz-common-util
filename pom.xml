@@ -5,7 +5,7 @@
 
     <groupId>net.unmz.java</groupId>
     <artifactId>unmz-common-util</artifactId>
-    <version>1.0.23</version>
+    <version>1.0.24</version>
     <packaging>jar</packaging>
 
     <name>unmz-common-util</name>
@@ -31,7 +31,7 @@
         <commons-lang3.version>3.5</commons-lang3.version>
         <dom4j.version>1.6.1</dom4j.version>
         <servlet-api.version>2.5</servlet-api.version>
-        <xstream.version>1.4.9</xstream.version>
+        <xstream.version>1.4.12</xstream.version>
         <bcprov-jdk15on.version>1.51</bcprov-jdk15on.version>
         <cglib.version>3.2.12</cglib.version>
     </properties>
