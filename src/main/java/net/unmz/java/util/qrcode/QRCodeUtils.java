@@ -61,7 +61,7 @@ public class QRCodeUtils {
             BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, QR_CODE_SIZE, QR_CODE_SIZE, hints);
             int width = bitMatrix.getWidth();
             int height = bitMatrix.getHeight();
-            image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+            image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
                     image.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF);
@@ -84,7 +84,7 @@ public class QRCodeUtils {
                 height = HEIGHT;
             }
             Image logoImg = src.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-            BufferedImage tag = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+            BufferedImage tag = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
             Graphics g = tag.getGraphics();
             g.drawImage(logoImg, 0, 0, null); // 绘制缩小后的图
             g.dispose();
@@ -94,7 +94,7 @@ public class QRCodeUtils {
             int x = (QR_CODE_SIZE - width) / 2;
             int y = (QR_CODE_SIZE - height) / 2;
             graph.drawImage(logoImg, x, y, width, height, Color.WHITE, null);
-            Shape shape = new RoundRectangle2D.Float(x, y, width, width, 0, 0);
+            Shape shape = new RoundRectangle2D.Float(x, y, width, width, 5, 5);
             graph.setStroke(new BasicStroke(3f));
             graph.draw(shape);
             graph.dispose();
