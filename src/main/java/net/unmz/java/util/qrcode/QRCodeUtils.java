@@ -10,9 +10,11 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.UUID;
 
 /**
  * Project Name: 功能描述：
@@ -28,29 +30,41 @@ public class QRCodeUtils {
     // 二维码尺寸
     private static final int QR_CODE_SIZE = 400;
     // LOGO宽度
-    private static final int WIDTH = 100;
+    private static final int WIDTH = 80;
     // LOGO高度
-    private static final int HEIGHT = 100;
+    private static final int HEIGHT = 80;
 
+    /**
+     * 创建二维码
+     *
+     * @param url     二维码URL地址,获取并解析内容
+     * @param logoUrl logoURL地址
+     * @return
+     * @throws Exception
+     */
     public static BufferedImage createImageByUrl(String url, String logoUrl) throws Exception {
         return createImage(getQrCodeUrlContent(url), logoUrl);
     }
 
+    /**
+     * 创建二维码
+     *
+     * @param content 二维码内容
+     * @return
+     * @throws Exception
+     */
     public static BufferedImage createImage(String content) throws Exception {
         return createImage(content, null);
     }
 
-    public static String getQrCodeUrlContent(String url) throws Exception {
-        BufferedImage bufferedImage = ImageIO.read(new URL(url).openStream());
-        LuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);
-        Binarizer binarizer = new HybridBinarizer(source);
-        BinaryBitmap bitmap = new BinaryBitmap(binarizer);
-        HashMap<DecodeHintType, Object> decodeHints = new HashMap<>();
-        decodeHints.put(DecodeHintType.CHARACTER_SET, CHARSET);
-        Result result = new MultiFormatReader().decode(bitmap, decodeHints);
-        return result.getText();
-    }
-
+    /**
+     * 创建二维码
+     *
+     * @param content 二维码内容
+     * @param logoUrl logoURL地址
+     * @return
+     * @throws Exception
+     */
     public static BufferedImage createImage(String content, String logoUrl) throws Exception {
         BufferedImage image;
         {
@@ -103,4 +117,33 @@ public class QRCodeUtils {
         return image;
     }
 
+
+    /**
+     * 解析二维码
+     *
+     * @param url 二维码地址
+     * @return
+     * @throws Exception
+     */
+    public static String getQrCodeUrlContent(String url) throws Exception {
+        BufferedImage bufferedImage = ImageIO.read(new URL(url).openStream());
+        LuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);
+        Binarizer binarizer = new HybridBinarizer(source);
+        BinaryBitmap bitmap = new BinaryBitmap(binarizer);
+        HashMap<DecodeHintType, Object> decodeHints = new HashMap<>();
+        decodeHints.put(DecodeHintType.CHARACTER_SET, CHARSET);
+        Result result = new MultiFormatReader().decode(bitmap, decodeHints);
+        return result.getText();
+    }
+
+    public static void main(String[] args) throws Exception {
+        String text = "https://www.baidu.com"; // 这里设置自定义网站url
+        String logoPath = "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2957705046,1654500225&fm=26&gp=0.jpg";
+        String destPath = "E:\\demo\\";
+        String fileName = destPath + UUID.randomUUID().toString().replace("-", "") + ".png";
+        ImageIO.write(createImage(text, logoPath), "png", new File(fileName));
+        System.out.println(fileName);
+    }
+
 }
+
