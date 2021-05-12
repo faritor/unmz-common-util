@@ -14,7 +14,7 @@
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.24</version>
+        <version>1.0.25</version>
     </dependency>
 
 现已包含:
@@ -40,7 +40,7 @@
 
 #### 更新日志:
 
-##### 2021-05-13 v1.0.25
+##### v1.0.25
 
     [M]升级xstream版本
 
