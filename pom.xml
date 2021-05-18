@@ -31,7 +31,7 @@
         <commons-lang3.version>3.5</commons-lang3.version>
         <dom4j.version>1.6.1</dom4j.version>
         <servlet-api.version>2.5</servlet-api.version>
-        <xstream.version>1.4.16</xstream.version>
+        <xstream.version>1.4.17</xstream.version>
         <bcprov-jdk15on.version>1.51</bcprov-jdk15on.version>
         <cglib.version>3.2.12</cglib.version>
         <google-zxing.version>3.4.1</google-zxing.version>
