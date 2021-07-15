@@ -7,12 +7,14 @@
 
 **本工具中的方法有部分采自网络，用与归纳整理，如有侵权，请联系我**
 
+**1.0.24版本开始不再兼容Java1.7**
+
 项目现已发布依赖地址:
 
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.24</version>
+        <version>1.0.25</version>
     </dependency>
 
 现已包含:
@@ -37,6 +39,12 @@
     18.二维码生产工具类
 
 #### 更新日志:
+
+##### 2021-07-15 v1.0.25
+
+    [M]升级xstream版本
+    [M]调整二维码工具类
+
 
 ##### 2021-03-05 v1.0.24
 
