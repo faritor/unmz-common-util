@@ -188,9 +188,6 @@ public class QRCodeUtils {
      * @param image 二维码
      */
     public static void setLogo(Image src, BufferedImage image) {
-        //设置偏移量
-        int offset = 10;
-
         int width = src.getWidth(null);
         int height = src.getHeight(null);
 
@@ -203,11 +200,12 @@ public class QRCodeUtils {
         Image logoImg = src.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 
         Graphics2D graph = image.createGraphics();
-        int x = (QR_CODE_SIZE - width) / 2 - offset;
-        int y = (QR_CODE_SIZE - height) / 2 - offset;
+        int x = (QR_CODE_SIZE - width) / 2;
+        int y = (QR_CODE_SIZE - height) / 2;
         graph.drawImage(logoImg, x, y, width, height, Color.WHITE, null);
         Shape shape = new RoundRectangle2D.Float(x, y, width, height, 0, 0);
         graph.draw(shape);
+        graph.setStroke(new BasicStroke(10f));
         graph.dispose();
     }
 
