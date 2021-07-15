@@ -43,6 +43,8 @@
 ##### 2021-07-15 v1.0.25
 
     [M]升级xstream版本
+    [M]升级httpclient版本
+    [M]升级fastjson版本
     [M]调整二维码工具类
 
 
