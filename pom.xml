@@ -36,7 +36,9 @@
         <cglib.version>3.2.12</cglib.version>
         <google-zxing.version>3.4.1</google-zxing.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
+        <hibernate-validator.version>6.2.0.Final</hibernate-validator.version>
     </properties>
+
     <licenses>
         <license>
             <name>MIT License</name>
@@ -135,6 +137,12 @@
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
             <version>${validation-api.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator.version}</version>
         </dependency>
 
     </dependencies>
