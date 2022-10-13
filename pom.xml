@@ -26,17 +26,20 @@
         <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
 
-        <fastjson.version>1.2.76</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <httpclient.version>4.5.13</httpclient.version>
         <commons-lang3.version>3.5</commons-lang3.version>
         <dom4j.version>1.6.1</dom4j.version>
         <servlet-api.version>2.5</servlet-api.version>
         <xstream.version>1.4.17</xstream.version>
-        <bcprov-jdk15on.version>1.51</bcprov-jdk15on.version>
+        <bcprov-jdk15on.version>1.69</bcprov-jdk15on.version>
         <cglib.version>3.2.12</cglib.version>
         <google-zxing.version>3.4.1</google-zxing.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
         <hibernate-validator.version>6.2.0.Final</hibernate-validator.version>
+
+        <nexus.release.url>https://nexus.unmz.net/repository/maven-releases/</nexus.release.url>
+        <nexus.snapshot.url>https://nexus.unmz.net/repository/maven-snapshots/</nexus.snapshot.url>
     </properties>
 
     <licenses>
@@ -143,6 +146,12 @@
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate-validator.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>jakarta.validation</groupId>
+                    <artifactId>jakarta.validation-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>
@@ -246,4 +255,18 @@
             </distributionManagement>
         </profile>
     </profiles>
+
+
+    <distributionManagement>
+        <repository>
+            <id>unmz</id>
+            <name>Nexus Release Repository</name>
+            <url>${nexus.release.url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>unmz</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>${nexus.snapshot.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
