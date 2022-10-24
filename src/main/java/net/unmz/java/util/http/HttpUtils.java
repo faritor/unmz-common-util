@@ -601,7 +601,7 @@ public class HttpUtils {
             BufferedReader bufferedReader =
                     new BufferedReader(
                             new InputStreamReader(HttpUtils.class.getClassLoader()
-                                    .getResourceAsStream("agent.txt")));
+                                    .getResourceAsStream("META-INF/agent.txt")));
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 Map<String, String> userAgent = new HashMap<>();
