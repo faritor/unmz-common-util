@@ -14,7 +14,7 @@
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.25</version>
+        <version>1.0.26</version>
     </dependency>
 
 现已包含:
@@ -37,8 +37,15 @@
     16.UUID工具类
     17.对象属性可否为空,长度等校验
     18.二维码生产工具类
+    19.参数校验
 
 #### 更新日志:
+
+##### 2022-10-25 v1.0.26
+
+    [A]新增参数校验工具类，使用 javax.validation 
+    [A]新增随机请求头返回
+    [M]重载了MD5工具类加密方法
 
 ##### 2021-07-15 v1.0.25
 
@@ -46,7 +53,6 @@
     [M]升级httpclient版本
     [M]升级fastjson版本
     [M]调整二维码工具类
-
 
 ##### 2021-03-05 v1.0.24
 

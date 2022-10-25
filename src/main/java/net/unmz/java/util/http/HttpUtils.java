@@ -25,6 +25,8 @@ import org.apache.http.util.EntityUtils;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLEncoder;
@@ -35,6 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 
 /**
@@ -584,6 +587,34 @@ public class HttpUtils {
 
         public HttpDeleteWithBody() {
             super();
+        }
+    }
+
+    /**
+     * 获取随机头
+     *
+     * @return {@code Map<String,String>}
+     */
+    public static Map<String, String> getRandomHeader() {
+        try {
+            List<Map<String, String>> list = new ArrayList<>();
+            BufferedReader bufferedReader =
+                    new BufferedReader(
+                            new InputStreamReader(HttpUtils.class.getClassLoader()
+                                    .getResourceAsStream("META-INF/agent.txt")));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                Map<String, String> userAgent = new HashMap<>();
+                userAgent.put("User-Agent", line);
+                list.add(userAgent);
+            }
+            bufferedReader.close();
+            return list.get(new Random().nextInt(list.size() - 1));
+        } catch (Exception e) {
+            Map<String, String> userAgent = new HashMap<>();
+            userAgent.put("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 15_6_1 like Mac OS X) "
+                    + "AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148");
+            return userAgent;
         }
     }
 
