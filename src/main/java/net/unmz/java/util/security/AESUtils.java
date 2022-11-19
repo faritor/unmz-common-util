@@ -89,7 +89,9 @@ public class AESUtils {
             KeyGenerator keygen = KeyGenerator.getInstance("AES");
             //2.根据encodeRules规则初始化密钥生成器
             //生成一个256位的随机源,根据传入的字节数组
-            keygen.init(256, new SecureRandom(secret.getBytes(StandardCharsets.UTF_8)));
+            SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+            secureRandom.setSeed(secret.getBytes(StandardCharsets.UTF_8));
+            keygen.init(256, secureRandom);
             //3.产生原始对称密钥
             SecretKey original_key = keygen.generateKey();
             //4.获得原始对称密钥的字节数组
@@ -130,7 +132,9 @@ public class AESUtils {
             KeyGenerator keygen = KeyGenerator.getInstance("AES");
             //2.根据encodeRules规则初始化密钥生成器
             //生成一个256位的随机源,根据传入的字节数组
-            keygen.init(256, new SecureRandom(secret.getBytes(StandardCharsets.UTF_8)));
+            SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+            secureRandom.setSeed(secret.getBytes(StandardCharsets.UTF_8));
+            keygen.init(256, secureRandom);
             //3.产生原始对称密钥
             SecretKey original_key = keygen.generateKey();
             //4.获得原始对称密钥的字节数组
@@ -178,7 +182,9 @@ public class AESUtils {
         KeyGenerator keygen = KeyGenerator.getInstance(ALGORITHM);
         //2.根据encodeRules规则初始化密钥生成器
         //生成一个256位的随机源,根据传入的字节数组
-        keygen.init(256, new SecureRandom(secret.getBytes(StandardCharsets.UTF_8)));
+        SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+        secureRandom.setSeed(secret.getBytes(StandardCharsets.UTF_8));
+        keygen.init(256, secureRandom);
         //3.产生原始对称密钥
         SecretKey original_key = keygen.generateKey();
         //4.获得原始对称密钥的字节数组
@@ -203,7 +209,9 @@ public class AESUtils {
         KeyGenerator keygen = KeyGenerator.getInstance(ALGORITHM);
         //2.根据encodeRules规则初始化密钥生成器
         //生成一个256位的随机源,根据传入的字节数组
-        keygen.init(256, new SecureRandom(secret.getBytes(StandardCharsets.UTF_8)));
+        SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+        secureRandom.setSeed(secret.getBytes(StandardCharsets.UTF_8));
+        keygen.init(256, secureRandom);
         //3.产生原始对称密钥
         SecretKey original_key = keygen.generateKey();
         //4.获得原始对称密钥的字节数组
