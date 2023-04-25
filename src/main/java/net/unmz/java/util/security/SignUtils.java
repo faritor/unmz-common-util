@@ -24,6 +24,44 @@ import java.util.*;
  */
 public class SignUtils {
 
+    /**
+     * 拼接排序好的参数名称和参数值 拼接格式为  [参数名a]=[参数值a]&[参数名b]=[参数值b].....
+     *
+     * @param maps 参数key-value map集合
+     * @return {@code String }
+     * @author Faritor
+     * @date 2023/04/24
+     */
+    public static String splitParams(Map<String, String> maps) {
+        return splitParams(maps, null);
+    }
+
+    /**
+     * 拼接排序好的参数名称和参数值 拼接格式为  [参数名a]=[参数值a]&[参数名b]=[参数值b].....
+     *
+     * @param maps                    参数key-value map集合
+     * @param excludedSignatureFields 标志
+     * @return {@code String }
+     * @author Faritor
+     * @date 2023/04/24
+     */
+    public static String splitParams(Map<String, String> maps, String excludedSignatureFields) {
+        StringBuilder paramStr = new StringBuilder();
+        Map<String, String> sortMap = new TreeMap<>(maps);
+        for (Map.Entry<String, String> entry : sortMap.entrySet()) {
+            if (StringUtils.isBlank(entry.getKey())
+                    || StringUtils.isBlank(entry.getValue())
+                    || Objects.equals(excludedSignatureFields, entry.getKey())) {
+                continue;
+            }
+            paramStr.append("&").append(entry.getKey()).append("=").append(entry.getValue());
+        }
+        if (paramStr.length() > 0) {
+            return paramStr.substring(1);
+        }
+        return null;
+    }
+
     public static String getSign(Map<String, String> params) {
         Map<String, String> sortMap = new TreeMap<>(params);
         // 以k1=v1&k2=v2...方式拼接参数

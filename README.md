@@ -14,7 +14,7 @@
     <dependency>
         <groupId>net.unmz.java</groupId>
         <artifactId>unmz-common-util</artifactId>
-        <version>1.0.26</version>
+        <version>1.0.27</version>
     </dependency>
 
 现已包含:
@@ -40,6 +40,13 @@
     19.参数校验
 
 #### 更新日志:
+
+##### 2023-04-25 v1.0.27
+
+    [A]新增RSA2加解密工具类
+    [A]新增签名排序方法,支持自定义字段过滤
+    [M]修复AES在linux环境中可能存在异常的问题
+
 
 ##### 2022-10-25 v1.0.26
 
