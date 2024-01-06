@@ -4,7 +4,15 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.*;
+import java.time.Clock;
+import java.time.DayOfWeek;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
@@ -12,6 +20,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Project Name: 常用工具类集合
@@ -1386,12 +1397,34 @@ public class DateUtils {
         long day = min / 60 / 24;
         long hour = min / 60 - day * 24;
         long minutes = min - hour * 60 - day * 24 * 60;
-        if (day > 0)
+        if (day > 0) {
             remainDays += day + "天";
-        if (hour > 0 || (hour == 0 && minutes > 0))
+        }
+        if (hour > 0 || (hour == 0 && minutes > 0)) {
             remainDays += hour + "小时";
-        if (minutes > 0)
+        }
+        if (minutes > 0) {
             remainDays += minutes + "小时";
+        }
         return remainDays;
+    }
+
+
+    /**
+     * 获取内容日期信息
+     *
+     * @param content 内容
+     * @return {@code List<String> }
+     * @author Faritor
+     * @date 2024/01/06
+     */
+    public static List<String> getContentDateInfo(String content) {
+        Pattern p = Pattern.compile("\\d{4}[年/-]\\d{1,2}[月/-]\\d{1,2}[日号]?");
+        Matcher matcher = p.matcher(content);
+        List<String> dateList = new ArrayList<>();
+        while (matcher.find()) {
+            dateList.add(matcher.group(0));
+        }
+        return dateList;
     }
 }
