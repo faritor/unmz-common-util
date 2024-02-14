@@ -99,8 +99,7 @@ public class DateUtils {
      * noon GMT, such that it matches the nearest half-integer (i.e., a julian
      * date of 1.4 gets changed to 1.5, and 0.9 gets changed to 0.5.)
      *
-     * @param JD
-     *            the Julian date
+     * @param JD the Julian date
      * @return the Gregorian date
      */
     public static final Date toDate(float JD) {
@@ -150,10 +149,8 @@ public class DateUtils {
      * second date is after the first, and negative values indicate, well, the
      * opposite. Relying on specific times is problematic.
      *
-     * @param early
-     *            the "first date"
-     * @param late
-     *            the "second date"
+     * @param early the "first date"
+     * @param late  the "second date"
      * @return the days between the two dates
      */
     public static final int daysBetween(Date early, Date late) {
@@ -194,8 +191,7 @@ public class DateUtils {
      * href="http://quasar.as.utexas.edu/BillInfo/JulianDatesG.html">Julian Day
      * Calculations (Gregorian Calendar)</a>, provided by Bill Jeffrys.
      *
-     * @param c
-     *            a calendar instance
+     * @param c a calendar instance
      * @return the julian day number
      */
     public static final float toJulian(Calendar c) {
@@ -229,14 +225,10 @@ public class DateUtils {
     /**
      * 日期增加
      *
-     * @param isoString
-     *            日期字符串
-     * @param fmt
-     *            格式
-     * @param field
-     *            年/月/日 Calendar.YEAR/Calendar.MONTH/Calendar.DATE
-     * @param amount
-     *            增加数量
+     * @param isoString 日期字符串
+     * @param fmt       格式
+     * @param field     年/月/日 Calendar.YEAR/Calendar.MONTH/Calendar.DATE
+     * @param amount    增加数量
      * @return
      * @throws ParseException
      */
@@ -256,14 +248,10 @@ public class DateUtils {
      * given time field.
      *
      * @param isoString
-     * @param field
-     *            the time field.
-     * @param up
-     *            Indicates if rolling up or rolling down the field value.
-     * @param fmt
-     *            use formating char's
-     * @exception ParseException
-     *                if an unknown field value is given.
+     * @param field     the time field.
+     * @param up        Indicates if rolling up or rolling down the field value.
+     * @param fmt       use formating char's
+     * @throws ParseException if an unknown field value is given.
      */
     public static String roll(String isoString, String fmt, int field, boolean up) {
         Calendar cal = GregorianCalendar.getInstance();
@@ -277,12 +265,9 @@ public class DateUtils {
      * given time field.
      *
      * @param isoString
-     * @param field
-     *            the time field.
-     * @param up
-     *            Indicates if rolling up or rolling down the field value.
-     * @exception ParseException
-     *                if an unknown field value is given.
+     * @param field     the time field.
+     * @param up        Indicates if rolling up or rolling down the field value.
+     * @throws ParseException if an unknown field value is given.
      */
     public static String roll(String isoString, int field, boolean up) {
         return roll(isoString, DATETIME_PATTERN, field, up);
@@ -291,12 +276,9 @@ public class DateUtils {
     /**
      * 字符串转换为日期java.util.Date
      *
-     * @param dateText
-     *            字符串
-     * @param format
-     *            日期格式
-     * @param lenient
-     *            日期越界标志
+     * @param dateText 字符串
+     * @param format   日期格式
+     * @param lenient  日期越界标志
      * @return
      */
     public static Date stringToDate(String dateText, String format, boolean lenient) {
@@ -322,10 +304,8 @@ public class DateUtils {
     /**
      * 字符串转换为日期java.util.Date
      *
-     * @param dateString
-     *            字符串
-     * @param format
-     *            日期格式
+     * @param dateString 字符串
+     * @param format     日期格式
      * @return
      */
     public static Date stringToDate(String dateString, String format) {
@@ -335,8 +315,7 @@ public class DateUtils {
     /**
      * 字符串转换为日期java.util.Date
      *
-     * @param dateString
-     *            字符串
+     * @param dateString 字符串
      */
     public static Date stringToDate(String dateString) {
         if (!"".equals(dateString) && dateString != null) {
@@ -356,11 +335,9 @@ public class DateUtils {
     /**
      * 根据时间变量返回时间字符串
      *
+     * @param pattern 时间字符串样式
+     * @param date    时间变量
      * @return 返回时间字符串
-     * @param pattern
-     *            时间字符串样式
-     * @param date
-     *            时间变量
      */
     public static String dateToString(Date date, String pattern) {
         if (date == null) {
@@ -388,8 +365,7 @@ public class DateUtils {
     /**
      * 返回当前日期字符串
      *
-     * @param pattern
-     *            日期字符串样式
+     * @param pattern 日期字符串样式
      * @return
      */
     public static String getCurrentDateString(String pattern) {
@@ -476,8 +452,7 @@ public class DateUtils {
     /**
      * 日期增加
      *
-     * @param date
-     *            日期字符串 yyyy-MM-dd
+     * @param date 日期字符串 yyyy-MM-dd
      * @param days
      * @return 日期字符串 yyyy-MM-dd
      */
@@ -488,10 +463,8 @@ public class DateUtils {
     /**
      * 日期增加
      *
-     * @param date
-     *            日期字符串
-     * @param fmt
-     *            日期格式
+     * @param date 日期字符串
+     * @param fmt  日期格式
      * @param days
      * @return
      */
@@ -502,10 +475,8 @@ public class DateUtils {
     /**
      * 日期字符串格式转换
      *
-     * @param dateString
-     *            日期字符串
-     * @param desfmt
-     *            目标日期格式
+     * @param dateString 日期字符串
+     * @param desfmt     目标日期格式
      * @return
      */
     public static String stringToString(String dateString, String desfmt) {
@@ -524,12 +495,9 @@ public class DateUtils {
     /**
      * 日期字符串格式转换
      *
-     * @param src
-     *            日期字符串
-     * @param srcfmt
-     *            源日期格式
-     * @param desfmt
-     *            目标日期格式
+     * @param src    日期字符串
+     * @param srcfmt 源日期格式
+     * @param desfmt 目标日期格式
      * @return
      */
     public static String stringToString(String src, String srcfmt, String desfmt) {
@@ -553,10 +521,8 @@ public class DateUtils {
     /**
      * yyyy年MM月dd日至yyyy年MM月dd日 获取止期
      *
-     * @param src
-     *            日期字符串
-     * @param desfmt
-     *            目标日期格式
+     * @param src    日期字符串
+     * @param desfmt 目标日期格式
      * @return
      */
     public static String getPolicyEffDate(String src, String srcfmt, String desfmt) {
@@ -569,8 +535,7 @@ public class DateUtils {
     /**
      * yyyy年MM月dd日
      *
-     * @param src
-     *            日期字符串
+     * @param src 日期字符串
      * @return
      */
     public static String getChineseDate(String src) {
@@ -675,37 +640,40 @@ public class DateUtils {
 
     /**
      * 获取月份的第一天
+     *
      * @param date
      * @return
      */
-    public static String getFirstDayOfMonth(Date date){
-        Calendar   ca   =   Calendar.getInstance();
+    public static String getFirstDayOfMonth(Date date) {
+        Calendar ca = Calendar.getInstance();
         ca.setTime(date);
-        ca.set(Calendar.DAY_OF_MONTH,   1);
-        Date   firstDate   =   ca.getTime();
+        ca.set(Calendar.DAY_OF_MONTH, 1);
+        Date firstDate = ca.getTime();
         return dateToString(firstDate);
     }
 
     /**
      * 获取月份的最后一天
+     *
      * @param date
      * @return
      */
-    public static Date getLastDayOfMonth(Date date){
+    public static Date getLastDayOfMonth(Date date) {
         Calendar ca = Calendar.getInstance();
         ca.setTime(date);
-        ca.set(Calendar.DAY_OF_MONTH,   1);
+        ca.set(Calendar.DAY_OF_MONTH, 1);
         Date firstDate = ca.getTime();
         return addDay(addMonth(firstDate, 1), -1);
     }
 
     /**
      * 获取日期最早时间，如传入2014-12-26，返回2014-12-26 0:00:00
+     *
      * @param date
      * @return
      */
-    public static Date getDateStart(Date date){
-        Calendar   ca   =   Calendar.getInstance();
+    public static Date getDateStart(Date date) {
+        Calendar ca = Calendar.getInstance();
         ca.setTime(date);
         ca.set(Calendar.HOUR, 0);
         ca.set(Calendar.MINUTE, 0);
@@ -715,16 +683,17 @@ public class DateUtils {
 
     /**
      * 获取日期最晚时间，如传入2014-12-26，返回2014-12-26 23:59:59
+     *
      * @param date
      * @return
      */
-    public static Date getDateEnd(Date date){
-        Calendar   ca   =   Calendar.getInstance();
+    public static Date getDateEnd(Date date) {
+        Calendar ca = Calendar.getInstance();
         ca.setTime(date);
         ca.set(Calendar.HOUR, 23);
         ca.set(Calendar.MINUTE, 59);
         ca.set(Calendar.SECOND, 59);
-        return  ca.getTime();
+        return ca.getTime();
     }
 
     public ArrayList<Date> getDateList(Date startTime, Date endTime) {
@@ -1087,6 +1056,40 @@ public class DateUtils {
      */
     public static DayOfWeek getWeek() {
         return LocalDate.now().getDayOfWeek();
+    }
+
+
+    /**
+     * 获取今天是周几
+     *
+     * @return {@code String }
+     * @author Faritor
+     * @date 2024/02/14
+     */
+    public static String getDayOfTheWeek() {
+        return getDayOfTheWeek(LocalDate.now());
+    }
+
+    /**
+     * 获取指定日期是周几
+     *
+     * @return {@code String }
+     * @author Faritor
+     * @date 2024/02/14
+     */
+    public static String getDayOfTheWeek(LocalDate currentDate) {
+        String[][] strArray = {{"MONDAY", "一"}, {"TUESDAY", "二"}, {"WEDNESDAY", "三"}, {"THURSDAY", "四"}, {"FRIDAY", "五"}, {"SATURDAY", "六"}, {"SUNDAY", "日"}};
+
+        String k = String.valueOf(currentDate.getDayOfWeek());
+        //获取行数
+        for (String[] strings : strArray) {
+            if (k.equals(strings[0])) {
+                k = strings[1];
+                break;
+            }
+        }
+
+        return "星期" + k;
     }
 
     /**
