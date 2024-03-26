@@ -2,11 +2,10 @@ package net.unmz.java.util.http;
 
 import net.unmz.java.util.json.JsonUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -19,7 +18,6 @@ import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import javax.net.ssl.SSLContext;
@@ -108,8 +106,9 @@ public class HttpUtils {
                                              Map<String, String> headers,
                                              Map<String, String> queries) throws Exception {
         HttpClient httpClient = wrapClient(host);
-        if (queries == null)
+        if (queries == null) {
             queries = new HashMap<>();
+        }
 
         HttpGet request = new HttpGet(buildUrl(host, path, queries));
 
@@ -176,25 +175,7 @@ public class HttpUtils {
                                               Map<String, String> headers,
                                               Map<String, String> queries,
                                               String body) throws Exception {
-        HttpClient httpClient = wrapClient(host);
-        if (queries == null)
-            queries = new HashMap<>();
-
-        HttpPost request = new HttpPost(buildUrl(host, path, queries));
-
-        if (headers == null) {
-            headers = new HashMap<>();
-            setHttpHeader(request);
-        }
-
-        for (Map.Entry<String, String> e : headers.entrySet()) {
-            request.addHeader(e.getKey(), e.getValue());
-        }
-
-        if (StringUtils.isNotBlank(body)) {
-            request.setEntity(new StringEntity(body, "utf-8"));
-        }
-        return httpClient.execute(request);
+        return doPostResponse(host, path, headers, queries, new StringEntity(body, "utf-8"));
     }
 
     /**
@@ -230,10 +211,29 @@ public class HttpUtils {
                                               Map<String, String> headers,
                                               Map<String, String> queries,
                                               byte[] body) throws Exception {
+        return doPostResponse(host, path, headers, queries, new ByteArrayEntity(body));
+    }
+
+    /**
+     * Post stream
+     *
+     * @param host host 地址
+     * @param path url 路径
+     * @param headers 请求偷
+     * @param queries 请求参数
+     * @param body 请求体
+     * @return 返回值
+     * @throws Exception 请求异常
+     */
+    public static HttpResponse doPostResponse(String host, String path,
+                                              Map<String, String> headers,
+                                              Map<String, String> queries,
+                                              HttpEntity body) throws Exception {
         HttpClient httpClient = wrapClient(host);
 
-        if (queries == null)
+        if (queries == null) {
             queries = new HashMap<>();
+        }
 
         HttpPost request = new HttpPost(buildUrl(host, path, queries));
 
@@ -247,11 +247,10 @@ public class HttpUtils {
         }
 
         if (body != null) {
-            request.setEntity(new ByteArrayEntity(body));
+            request.setEntity(body);
         }
         return httpClient.execute(request);
     }
-
 
     /**
      * Put String
@@ -320,8 +319,9 @@ public class HttpUtils {
                                              Map<String, String> queries,
                                              String body) throws Exception {
         HttpClient httpClient = wrapClient(host);
-        if (queries == null)
+        if (queries == null) {
             queries = new HashMap<>();
+        }
 
         HttpPut request = new HttpPut(buildUrl(host, path, queries));
 
@@ -375,8 +375,9 @@ public class HttpUtils {
                                              Map<String, String> queries,
                                              byte[] body) throws Exception {
         HttpClient httpClient = wrapClient(host);
-        if (queries == null)
+        if (queries == null) {
             queries = new HashMap<>();
+        }
 
         HttpPut request = new HttpPut(buildUrl(host, path, queries));
 
@@ -476,8 +477,9 @@ public class HttpUtils {
                                                 Map<String, String> queries,
                                                 String body) throws Exception {
         HttpClient httpClient = wrapClient(host);
-        if (queries == null)
+        if (queries == null) {
             queries = new HashMap<>();
+        }
 
         HttpDeleteWithBody request = new HttpDeleteWithBody(buildUrl(host, path, queries));
 
@@ -541,14 +543,18 @@ public class HttpUtils {
         try {
             SSLContext ctx = SSLContext.getInstance("TLS");
             X509TrustManager tm = new X509TrustManager() {
+
+                @Override
                 public X509Certificate[] getAcceptedIssuers() {
                     return null;
                 }
 
+                @Override
                 public void checkClientTrusted(X509Certificate[] xcs, String str) {
 
                 }
 
+                @Override
                 public void checkServerTrusted(X509Certificate[] xcs, String str) {
 
                 }
@@ -571,6 +577,7 @@ public class HttpUtils {
     static class HttpDeleteWithBody extends HttpEntityEnclosingRequestBase {
         static final String METHOD_NAME = "DELETE";
 
+        @Override
         public String getMethod() {
             return METHOD_NAME;
         }
